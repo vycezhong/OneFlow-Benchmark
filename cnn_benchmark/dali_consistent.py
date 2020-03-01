@@ -216,9 +216,8 @@ class DALIGenericIterator(object):
                 p.build()
         # Use double-buffering of data batches
         #self._data_batches = [[None] for i in range(self._num_gpus)]
-        self._data_batches = [None for i in range(2)]
+        self._data_batches = None
         self._counter = 0
-        self._current_data_batch = 0
         self.output_map = output_map
 
         # We need data about the batches (like shape information),
@@ -259,7 +258,7 @@ class DALIGenericIterator(object):
                 category_info.append((x.shape(), np.dtype(x.dtype())))
 
             # If we did not yet allocate memory for that batch, do it now
-            if self._data_batches[self._current_data_batch] is None:
+            if self._data_batches is None:
                 for category in self.output_map:
                     t = category_tensors[category]
                     assert type(t) is not TensorGPU, "CPU data only"#TODO
@@ -270,9 +269,9 @@ class DALIGenericIterator(object):
                     shape[0] = self._num_gpus * shape[0]
                     d.append(np.zeros(shape, dtype = dtype))
 
-                self._data_batches[self._current_data_batch] = d
+                self._data_batches = d
 
-            d = self._data_batches[self._current_data_batch]
+            d = self._data_batches
             # Copy data from DALI Tensors to NDArrays
             if self._dynamic_shape:
                 for j, (shape, dtype) in enumerate(category_info):
@@ -288,9 +287,7 @@ class DALIGenericIterator(object):
                 p.release_outputs()
                 p.schedule_run()
 
-        copy_db_index = self._current_data_batch
         # Change index for double buffering
-        self._current_data_batch = (self._current_data_batch + 1) % 1
         self._counter += self._num_gpus * self.batch_size
 
         assert not self._fill_last_batch
@@ -309,7 +306,7 @@ class DALIGenericIterator(object):
         #    for db in self._data_batches:
         #        db[copy_db_index].pad = 0
 
-        return self._data_batches[copy_db_index]
+        return self._data_batches
 
     def next(self):
         """
