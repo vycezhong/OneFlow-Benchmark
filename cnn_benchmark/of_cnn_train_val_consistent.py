@@ -165,8 +165,6 @@ def main():
     flow.env.log_dir(args.log_dir)
 
     snapshot = Snapshot(args.model_save_dir, args.model_load_dir)
-    snapshot.save('alexnet_init')
-    exit()
 
     train_data_iter, val_data_iter = get_rec_iter(args, True)
     timer.start()
