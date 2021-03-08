@@ -217,6 +217,7 @@ class GPT2(object):
         self.attention_dropout = args.attention_dropout
         self.hidden_dropout = args.hidden_dropout
         self.parallel_hierarchy = args.parallel_hierarchy
+        self.is_2d_sbp = len(self.parallel_hierarchy) > 1
         self.use_fp16 = args.use_fp16
         self.use_big_fc = args.use_big_fc
         self.checkpoint_activations = args.checkpoint_activations
@@ -280,18 +281,13 @@ class GPT2(object):
     def embedding(self, x):
         """ position embedding and token embedding
         """
-        if len(self.parallel_hierarchy) == 1:
-            wte_parallel_distribution = ["S(0)"]
-        elif len(self.parallel_hierarchy) == 2:
-            wte_parallel_distribution = ["B", "S(0)"]
-        else:
-            assert 0, '1D, 2D SBP only'
-        wpe_parallel_distribution = ["B" for _ in self.parallel_hierarchy]
+        wte_parallel_distribution=['B', 'S(0)'] if self.is_2d_sbp else ['S(0)']
+        act_parallel_distribution=['S(0)', 'B'] if self.is_2d_sbp else ['S(0)']
         wpe = flow.get_variable(
             "wpe",
             shape=(self.n_ctx, self.n_embd),
             initializer=flow.random_normal_initializer(stddev=0.01),
-            parallel_distribution=wpe_parallel_distribution,
+            parallel_distribution=['B', 'B'] if self.is_2d_sbp else ['B'],
         )
         wte = flow.get_variable(
             "wte",
@@ -307,22 +303,22 @@ class GPT2(object):
 
         x = flow.hierarchical_parallel_cast(
             x, parallel_hierarchy=None, # To be removed 
-            parallel_distribution=["S(0)", "B"],
+            parallel_distribution=act_parallel_distribution,
             grad_mode="manual",
             grad_parallel_distribution=["S(0)"]
         )
         wte_model = flow.hierarchical_parallel_cast(
             wte, parallel_hierarchy=None, # To be removed 
-            parallel_distribution=["B", "S(0)"],
+            parallel_distribution=wte_parallel_distribution,
             grad_mode="manual",
-            grad_parallel_distribution=["B", "S(0)"]
+            grad_parallel_distribution=wte_parallel_distribution
         ) #cant delete model-AmpWhiteIdentity_2_clone_grad
         h = flow.gather(wte_model, x, name="embd_gather")
         h = flow.hierarchical_parallel_cast(
             h, parallel_hierarchy=None, # To be removed 
-            parallel_distribution=["S(0)", "B"],
+            parallel_distribution=act_parallel_distribution,
             grad_mode="manual",
-            grad_parallel_distribution=["S(0)", "B"]
+            grad_parallel_distribution=act_parallel_distribution
         )
         h = h + wpe
         h = flow.nn.dropout(h, rate=self.embedding_dropout, name="embd_dropout")
@@ -382,6 +378,12 @@ class GPT2(object):
             return a
 
         with flow.scope.namespace("attn"):
+            x = flow.hierarchical_parallel_cast(
+                x, parallel_hierarchy=None, # To be removed 
+                parallel_distribution=["S(0)", "B"] if self.is_2d_sbp else ['S(0)'],
+                grad_mode="manual",
+                grad_parallel_distribution=["S(0)", "B"] if self.is_2d_sbp else ['S(0)']
+            ) #for grad P->B
             if self.use_big_fc:
                 c = col_parallel_linear("c_attn", x, e * 3, self.parallel_hierarchy)
                 assert len(c.shape) == 2
@@ -398,12 +400,6 @@ class GPT2(object):
                     c, begin=[None, None, 2], size=[None, None, 1]
                 )
             else:
-                x = flow.hierarchical_parallel_cast(
-                    x, parallel_hierarchy=None, # To be removed 
-                    parallel_distribution=["S(0)", "B"],
-                    grad_mode="manual",
-                    grad_parallel_distribution=["S(0)", "B"]
-                ) #for grad P->B
                 q = col_parallel_linear("q_attn", x, e, self.parallel_hierarchy) # x ["S(0)", "B"] w[B,S1] b[B,S0] -> [S0, S1]
                 k = col_parallel_linear("k_attn", x, e, self.parallel_hierarchy)
                 v = col_parallel_linear("v_attn", x, e, self.parallel_hierarchy)
@@ -421,7 +417,7 @@ class GPT2(object):
             print("before merge_heads a", a.shape) #(b,n,s,h)[S0, S1]
             a = merge_heads(a)
             print("after merge_heads a", a.shape)  #(b,s,e)[S0, S2]
-            a = row_parallel_linear("c_proj", a, e, [2, 2])
+            a = row_parallel_linear("c_proj", a, e, self.parallel_hierarchy)
             a = flow.nn.dropout(a, rate=self.hidden_dropout) #[S0,B]
             a = flow.reshape(a, (self.batch_size, self.seq_len, self.n_embd))
             return a, present
