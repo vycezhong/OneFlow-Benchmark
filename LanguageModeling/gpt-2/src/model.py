@@ -114,17 +114,9 @@ def norm_2d(x, axis=-1, epsilon=1e-5, name=None):
     return flow.flatten(y, 0, 1) #can't process sbp in reshape op.cpp, use flatten op
 
 
-def col_parallel_linear(name, x, nf, parallel_hierarchy, *, w_init_stdev=0.02):
-    if len(parallel_hierarchy) == 1:
-        weight_parallel_distribution = ["S(1)"]
-        bias_parallel_distribution = ["S(0)"]
-        #x_grad_parallel_distribution = ["S(0)"]
-    elif len(parallel_hierarchy) == 2:
-        weight_parallel_distribution = ["B", "S(1)"]
-        bias_parallel_distribution = ["B", "S(0)"]
-        #x_grad_parallel_distribution = ["S(0)", "B"]
-    else:
-        assert 0
+def col_parallel_linear(name, x, nf, is_2d_sbp, *, w_init_stdev=0.02):
+    weight_parallel_distribution = ["B", "S(1)"] if is_2d_sbp else ["S(1)"]
+    bias_parallel_distribution = ["B", "S(0)"] if is_2d_sbp else ["S(0)"]
 
     with flow.scope.namespace(name):
         if len(x.shape) == 3:
@@ -158,17 +150,10 @@ def col_parallel_linear(name, x, nf, parallel_hierarchy, *, w_init_stdev=0.02):
     return c
 
 
-def row_parallel_linear(name, x, nf, parallel_hierarchy, *, w_init_stdev=0.02):
-    if len(parallel_hierarchy) == 1:
-        weight_parallel_distribution = ["S(0)"]
-        bias_parallel_distribution = ["B"]
-        c_parallel_distribution = ["B"]
-    elif len(parallel_hierarchy) == 2:
-        weight_parallel_distribution = ["B", "S(0)"]
-        bias_parallel_distribution = ["B", "B"]
-        c_parallel_distribution = ["S(0)", "B"]
-    else:
-        assert 0
+def row_parallel_linear(name, x, nf, is_2d_sbp, *, w_init_stdev=0.02):
+    weight_parallel_distribution = ["B", "S(0)"] if is_2d_sbp else ["S(0)"]
+    bias_parallel_distribution = ["B", "B"] if is_2d_sbp else ["B"]
+    c_parallel_distribution = ["S(0)", "B"] if is_2d_sbp else ["B"]
 
     with flow.scope.namespace(name):
         if len(x.shape) == 3:
@@ -386,7 +371,7 @@ class GPT2(object):
                 grad_parallel_distribution=["S(0)", "B"] if self.is_2d_sbp else ['S(0)']
             ) #for grad P->B
             if self.use_big_fc:
-                c = col_parallel_linear("c_attn", x, e * 3, self.parallel_hierarchy)
+                c = col_parallel_linear("c_attn", x, e * 3, self.is_2d_sbp)
                 assert len(c.shape) == 2
                 assert c.shape[-1] == e * 3
                 bs = c.shape[0]
@@ -401,9 +386,9 @@ class GPT2(object):
                     c, begin=[None, None, 2], size=[None, None, 1]
                 )
             else:
-                q = col_parallel_linear("q_attn", x, e, self.parallel_hierarchy) # x ["S(0)", "B"] w[B,S1] b[B,S0] -> [S0, S1]
-                k = col_parallel_linear("k_attn", x, e, self.parallel_hierarchy)
-                v = col_parallel_linear("v_attn", x, e, self.parallel_hierarchy)
+                q = col_parallel_linear("q_attn", x, e, self.is_2d_sbp) # x ["S(0)", "B"] w[B,S1] b[B,S0] -> [S0, S1]
+                k = col_parallel_linear("k_attn", x, e, self.is_2d_sbp)
+                v = col_parallel_linear("v_attn", x, e, self.is_2d_sbp)
 
             q, k, v = map(split_heads, [q, k, v])
             # TODO: tf.stack([k, v], axis=1)
@@ -418,7 +403,7 @@ class GPT2(object):
             print("before merge_heads a", a.shape) #(b,n,s,h)[S0, S1]
             a = merge_heads(a)
             print("after merge_heads a", a.shape)  #(b,s,e)[S0, S2]
-            a = row_parallel_linear("c_proj", a, e, self.parallel_hierarchy)
+            a = row_parallel_linear("c_proj", a, e, self.is_2d_sbp)
             a = flow.nn.dropout(a, rate=self.hidden_dropout) #[S0,B]
             a = flow.reshape(a, (self.batch_size, self.seq_len, self.n_embd))
             return a, present
@@ -428,10 +413,10 @@ class GPT2(object):
         e = x.shape[-1]
 
         with flow.scope.namespace("mlp"):
-            h = col_parallel_linear("c_fc", x, e * 4, self.parallel_hierarchy)
+            h = col_parallel_linear("c_fc", x, e * 4, self.is_2d_sbp)
             h = gelu(h)
             assert h.shape[-1] == e * 4
-            h = row_parallel_linear("c_proj", h, e, self.parallel_hierarchy)
+            h = row_parallel_linear("c_proj", h, e, self.is_2d_sbp)
             h = flow.nn.dropout(h, rate=self.hidden_dropout)
             h = flow.reshape(h, (self.batch_size, self.seq_len, self.n_embd))
             return h
