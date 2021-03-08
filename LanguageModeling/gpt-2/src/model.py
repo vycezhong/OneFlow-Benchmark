@@ -216,8 +216,7 @@ class GPT2(object):
         self.embedding_dropout = args.embedding_dropout
         self.attention_dropout = args.attention_dropout
         self.hidden_dropout = args.hidden_dropout
-        self.embd_parallel_hierarchy = args.embd_parallel_hierarchy
-        self.attn_parallel_hierarchy = args.attn_parallel_hierarchy 
+        self.parallel_hierarchy = args.parallel_hierarchy
         self.use_fp16 = args.use_fp16
         self.use_big_fc = args.use_big_fc
         self.checkpoint_activations = args.checkpoint_activations
@@ -240,12 +239,6 @@ class GPT2(object):
                 h, wte = self.embedding(x)
                 # h(S0, B) wte(B, S0)
 
-                # set h SBP before decoder layer 
-                pd = ["S(0)", "B"] if len(self.attn_parallel_hierarchy) == 2 else ["S(0)"]
-                #h = flow.hierarchical_parallel_cast(
-                #    h, parallel_hierarchy=self.attn_parallel_hierarchy, 
-                #    parallel_distribution=pd,
-                #)
                 for i in range(self.n_layer):
                     h, present = self.encoder_layer(f"h{i}", h, past=past)
                     presents.append(present)
@@ -287,13 +280,13 @@ class GPT2(object):
     def embedding(self, x):
         """ position embedding and token embedding
         """
-        if len(self.embd_parallel_hierarchy) == 1:
+        if len(self.parallel_hierarchy) == 1:
             wte_parallel_distribution = ["S(0)"]
-        elif len(self.embd_parallel_hierarchy) == 2:
+        elif len(self.parallel_hierarchy) == 2:
             wte_parallel_distribution = ["B", "S(0)"]
         else:
             assert 0, '1D, 2D SBP only'
-        wpe_parallel_distribution = ["B" for _ in self.embd_parallel_hierarchy]
+        wpe_parallel_distribution = ["B" for _ in self.parallel_hierarchy]
         wpe = flow.get_variable(
             "wpe",
             shape=(self.n_ctx, self.n_embd),
@@ -391,7 +384,7 @@ class GPT2(object):
 
         with flow.scope.namespace("attn"):
             if self.use_big_fc:
-                c = col_parallel_linear("c_attn", x, e * 3, self.attn_parallel_hierarchy)
+                c = col_parallel_linear("c_attn", x, e * 3, self.parallel_hierarchy)
                 assert len(c.shape) == 2
                 assert c.shape[-1] == e * 3
                 bs = c.shape[0]

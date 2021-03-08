@@ -217,12 +217,8 @@ def get_parser(parser=None):
         "--ctrl_port", type=int, default=50051, help="ctrl_port for multinode job"
     )
     parser.add_argument(
-        "--embd_model_parallel_size", type=int, default=1,
+        "--model_parallel_size", type=int, default=1,
         help="Size of the model parallel for embedding tables."
-    )
-    parser.add_argument(
-        "--attn_model_parallel_size", type=int, default=2,
-        help="Size of the model parallel for attention layers."
     )
     parser.add_argument(
         "--parallel-loss",
@@ -245,15 +241,9 @@ def initialize_model_parallel(args):
         print('warning! there is only 1 device, set model parallel size to 1')
         return [1], [1]
 
-    assert device_num % args.embd_model_parallel_size == 0
-    assert device_num % args.attn_model_parallel_size == 0
-    embd_parallel_hierarchy = [device_num // args.embd_model_parallel_size,
-                               args.embd_model_parallel_size]
-    #embd_parallel_hierarchy = [4]
-    attn_parallel_hierarchy = [device_num // args.attn_model_parallel_size,
-                               args.attn_model_parallel_size]
-    #attn_parallel_hierarchy = [4]
-    return embd_parallel_hierarchy, attn_parallel_hierarchy
+    assert device_num % args.model_parallel_size == 0
+    parallel_hierarchy = [device_num // args.model_parallel_size, args.model_parallel_size]
+    return parallel_hierarchy
 
 
 def pad_vocab_size(vocab_size, alignment, model_parallel_size):
@@ -307,14 +297,14 @@ def get_args():
     # batch_size = args.batch_size_per_device * args.gpu_num_per_node * args.num_nodes
     args.batch_size = args.total_batch_size
 
-    args.embd_parallel_hierarchy, args.attn_parallel_hierarchy = initialize_model_parallel(args)
+    args.parallel_hierarchy = initialize_model_parallel(args)
 
     #embd_model_parallel_size = 1
 
     args.padded_vocab_size = pad_vocab_size(
         args.n_vocab,
         args.make_vocab_size_divisible_by,
-        args.embd_parallel_hierarchy[-1],
+        args.parallel_hierarchy[-1],
     )
 
     print_args(args)
