@@ -234,7 +234,7 @@ class GPT2(object):
 
         outputs = {}
         presents = []
-        with flow.scope.placement("gpu", "0:0-3", (2, 2)):
+        with flow.scope.placement("gpu", "0:0-3", self.parallel_hierarchy):
             with flow.scope.namespace(self.name):
                 h, wte = self.embedding(x)
                 # h(S0, B) wte(B, S0)
