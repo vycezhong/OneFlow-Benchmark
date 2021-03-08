@@ -9,7 +9,6 @@ def layer_norm_2D(
     begin_norm_axis: int = 1,
     begin_params_axis: int = -1,
     epsilon: float = 1e-5,
-    parallel_hierarchy=[2, 2], 
     parallel_distribution=["B", "B"],
     name: str = "LayerNorm",
 ):
@@ -30,7 +29,6 @@ def layer_norm_2D(
                 trainable=trainable,
                 model_name="beta",
                 reuse=False,
-                parallel_hierarchy=parallel_hierarchy,
                 parallel_distribution=parallel_distribution,
             )
     if scale:
@@ -43,7 +41,6 @@ def layer_norm_2D(
                 trainable=trainable,
                 model_name="gamma",
                 reuse=False,
-                parallel_hierarchy=parallel_hierarchy,
                 parallel_distribution=parallel_distribution,
             )
 
@@ -109,10 +106,10 @@ def norm(x, axis=-1, epsilon=1e-5, name=None):
     return flatten(y, start_dim=0, end_dim=1)
 
 
-def norm_2d(x, axis=-1, epsilon=1e-5, parallel_hierarchy=[2, 2], parallel_distribution=["B", "B"], name=None):
+def norm_2d(x, axis=-1, epsilon=1e-5, name=None):
     """Normalize to mean = 0, std = 1, then do a diagonal affine transform."""
     assert len(x.shape) == 3, name
-    y = layer_norm_2D(x, begin_norm_axis=axis, epsilon=epsilon, parallel_hierarchy=parallel_hierarchy, parallel_distribution=parallel_distribution, name=name)
+    y = layer_norm_2D(x, begin_norm_axis=axis, epsilon=epsilon, name=name)
     #return flatten(y, start_dim=0, end_dim=1)
     return flow.flatten(y, 0, 1) #can't process sbp in reshape op.cpp, use flatten op
 
@@ -259,7 +256,7 @@ class GPT2(object):
                     presents.append(present)
                 outputs["presents"] = presents
                 #h = norm(h, name="layernorm_f")
-                h = norm_2d(h, parallel_hierarchy = [2, 2], parallel_distribution=["B", "B"], name="layernorm_f") #[S0, B]
+                h = norm_2d(h, name="layernorm_f") #[S0, B]
 
                 wte = flow.hierarchical_parallel_cast(
                         wte, parallel_hierarchy=[2, 2], 
@@ -324,20 +321,20 @@ class GPT2(object):
             wte = flow.amp_white_identity(wte)
 
         x = flow.hierarchical_parallel_cast(
-            x, parallel_hierarchy=[2, 2], 
+            x, parallel_hierarchy=None, # To be removed 
             parallel_distribution=["S(0)", "B"],
             grad_mode="manual",
             grad_parallel_distribution=["S(0)"]
         )
         wte_model = flow.hierarchical_parallel_cast(
-            wte, parallel_hierarchy=[2, 2], 
+            wte, parallel_hierarchy=None, # To be removed 
             parallel_distribution=["B", "S(0)"],
             grad_mode="manual",
             grad_parallel_distribution=["B", "S(0)"]
         ) #cant delete model-AmpWhiteIdentity_2_clone_grad
         h = flow.gather(wte_model, x, name="embd_gather")
         h = flow.hierarchical_parallel_cast(
-            h, parallel_hierarchy=[2, 2], 
+            h, parallel_hierarchy=None, # To be removed 
             parallel_distribution=["S(0)", "B"],
             grad_mode="manual",
             grad_parallel_distribution=["S(0)", "B"]
@@ -359,10 +356,10 @@ class GPT2(object):
                 checkpointing=self.checkpoint_activations
             ):
                 #norm1 = norm(x, name="layernorm_1")
-                norm1 = norm_2d(x, parallel_hierarchy = [2, 2], parallel_distribution=["B", "B"], name="layernorm_1")
+                norm1 = norm_2d(x, name="layernorm_1")
                 a, present = self.attn(norm1, past=past)
                 x = x + a
-                norm2 = norm_2d(x, parallel_hierarchy = [2, 2], parallel_distribution=["B", "B"], name="layernorm_2")
+                norm2 = norm_2d(x, name="layernorm_2")
                 print("norm2 shape", norm2.shape)
                 norm2 = flow.hierarchical_parallel_cast(
                     norm2, parallel_hierarchy=[2, 2], 
