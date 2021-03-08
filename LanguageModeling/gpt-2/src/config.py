@@ -249,10 +249,10 @@ def initialize_model_parallel(args):
     assert device_num % args.attn_model_parallel_size == 0
     embd_parallel_hierarchy = [device_num // args.embd_model_parallel_size,
                                args.embd_model_parallel_size]
-    embd_parallel_hierarchy = [4]
+    #embd_parallel_hierarchy = [4]
     attn_parallel_hierarchy = [device_num // args.attn_model_parallel_size,
                                args.attn_model_parallel_size]
-    attn_parallel_hierarchy = [4]
+    #attn_parallel_hierarchy = [4]
     return embd_parallel_hierarchy, attn_parallel_hierarchy
 
 
@@ -309,7 +309,7 @@ def get_args():
 
     args.embd_parallel_hierarchy, args.attn_parallel_hierarchy = initialize_model_parallel(args)
 
-    embd_model_parallel_size = 1
+    #embd_model_parallel_size = 1
 
     args.padded_vocab_size = pad_vocab_size(
         args.n_vocab,

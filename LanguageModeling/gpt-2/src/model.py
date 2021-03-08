@@ -305,7 +305,6 @@ class GPT2(object):
         else:
             assert 0, '1D, 2D SBP only'
         wpe_parallel_distribution = ["B" for _ in self.embd_parallel_hierarchy]
-
         wpe = flow.get_variable(
             "wpe",
             shape=(self.n_ctx, self.n_embd),
@@ -330,14 +329,12 @@ class GPT2(object):
             x, parallel_hierarchy=[2, 2], 
             parallel_distribution=["S(0)", "B"],
             grad_mode="manual",
-            grad_parallel_hierarchy=[4],
             grad_parallel_distribution=["S(0)"]
         )
         wte_model = flow.hierarchical_parallel_cast(
             wte, parallel_hierarchy=[2, 2], 
             parallel_distribution=["B", "S(0)"],
             grad_mode="manual",
-            grad_parallel_hierarchy=[2, 2],
             grad_parallel_distribution=["B", "S(0)"]
         ) #cant delete model-AmpWhiteIdentity_2_clone_grad
         h = flow.gather(wte_model, x, name="embd_gather")
@@ -345,7 +342,6 @@ class GPT2(object):
             h, parallel_hierarchy=[2, 2], 
             parallel_distribution=["S(0)", "B"],
             grad_mode="manual",
-            grad_parallel_hierarchy=[2, 2],
             grad_parallel_distribution=["S(0)", "B"]
         )
         h = h + wpe
