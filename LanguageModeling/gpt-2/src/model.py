@@ -309,15 +309,13 @@ class GPT2(object):
             "wpe",
             shape=(self.n_ctx, self.n_embd),
             initializer=flow.random_normal_initializer(stddev=0.01),
-            parallel_hierarchy=[2, 2],
-            parallel_distribution=["B", "B"],
+            parallel_distribution=wpe_parallel_distribution,
         )
         wte = flow.get_variable(
             "wte",
             shape=(self.n_vocab, self.n_embd),
             initializer=flow.random_normal_initializer(stddev=0.02),
-            parallel_hierarchy=[2, 2],
-            parallel_distribution=["B", "S(0)"],
+            parallel_distribution=wte_parallel_distribution,
         )
 
         if self.use_fp16:
