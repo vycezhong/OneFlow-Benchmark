@@ -347,10 +347,9 @@ class GPT2(object):
                 norm2 = norm_2d(x, name="layernorm_2")
                 print("norm2 shape", norm2.shape)
                 norm2 = flow.hierarchical_parallel_cast(
-                    norm2, parallel_hierarchy=[2, 2], 
+                    norm2, parallel_hierarchy=None, # To be removed 
                     parallel_distribution=["S(0)", "B"],
                     grad_mode="manual",
-                    grad_parallel_hierarchy=[2, 2],
                     grad_parallel_distribution=["S(0)", "B"]
                     ) 
                 m = self.mlp(norm2)
@@ -403,12 +402,11 @@ class GPT2(object):
                     x, parallel_hierarchy=None, # To be removed 
                     parallel_distribution=["S(0)", "B"],
                     grad_mode="manual",
-                    grad_parallel_hierarchy=[2, 2],
                     grad_parallel_distribution=["S(0)", "B"]
                 ) #for grad P->B
-                q = col_parallel_linear("q_attn", x, e, [2, 2]) # x ["S(0)", "B"] w[B,S1] b[B,S0] -> [S0, S1]
-                k = col_parallel_linear("k_attn", x, e, [2, 2])
-                v = col_parallel_linear("v_attn", x, e, [2, 2])
+                q = col_parallel_linear("q_attn", x, e, self.parallel_hierarchy) # x ["S(0)", "B"] w[B,S1] b[B,S0] -> [S0, S1]
+                k = col_parallel_linear("k_attn", x, e, self.parallel_hierarchy)
+                v = col_parallel_linear("v_attn", x, e, self.parallel_hierarchy)
 
             q, k, v = map(split_heads, [q, k, v])
             # TODO: tf.stack([k, v], axis=1)
@@ -433,10 +431,10 @@ class GPT2(object):
         e = x.shape[-1]
 
         with flow.scope.namespace("mlp"):
-            h = col_parallel_linear("c_fc", x, e * 4, [2, 2])
+            h = col_parallel_linear("c_fc", x, e * 4, self.parallel_hierarchy)
             h = gelu(h)
             assert h.shape[-1] == e * 4
-            h = row_parallel_linear("c_proj", h, e, [2, 2])
+            h = row_parallel_linear("c_proj", h, e, self.parallel_hierarchy)
             h = flow.nn.dropout(h, rate=self.hidden_dropout)
             h = flow.reshape(h, (self.batch_size, self.seq_len, self.n_embd))
             return h
