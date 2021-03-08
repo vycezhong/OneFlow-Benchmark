@@ -138,7 +138,6 @@ def col_parallel_linear(name, x, nf, parallel_hierarchy, *, w_init_stdev=0.02):
             shape=(nx, nf),
             dtype=x.dtype,
             initializer=flow.random_normal_initializer(stddev=w_init_stdev),
-            parallel_hierarchy=parallel_hierarchy,
             parallel_distribution=weight_parallel_distribution,
         )
 
@@ -147,14 +146,13 @@ def col_parallel_linear(name, x, nf, parallel_hierarchy, *, w_init_stdev=0.02):
             shape=(nf,),
             dtype=x.dtype,
             initializer=flow.constant_initializer(0.0),
-            parallel_hierarchy=parallel_hierarchy,
             parallel_distribution=bias_parallel_distribution,
         )
 
         c = flow.matmul(x, weight, name="matmul")
-        print("c.shape", c.shape, "x.shape", x.shape, "weight.shape", weight.shape, "bias.shape", bias.shape)
+        # print("c.shape", c.shape, "x.shape", x.shape, "weight.shape", weight.shape, "bias.shape", bias.shape)
         c = flow.nn.bias_add(c, bias, name="biasadd")
-        print("c.shape", c.shape)
+        # print("c.shape", c.shape)
 
 
     return c
@@ -184,7 +182,6 @@ def row_parallel_linear(name, x, nf, parallel_hierarchy, *, w_init_stdev=0.02):
             shape=(nx, nf),
             dtype=x.dtype,
             initializer=flow.random_normal_initializer(stddev=w_init_stdev),
-            parallel_hierarchy=parallel_hierarchy,
             parallel_distribution=weight_parallel_distribution,
         )
         bias = flow.get_variable(
@@ -192,15 +189,13 @@ def row_parallel_linear(name, x, nf, parallel_hierarchy, *, w_init_stdev=0.02):
             shape=(nf,),
             dtype=x.dtype,
             initializer=flow.constant_initializer(0.0),
-            parallel_hierarchy=parallel_hierarchy,
             parallel_distribution=bias_parallel_distribution,
         )
         c = flow.matmul(x, weight, name="matmul")
         c = flow.hierarchical_parallel_cast(
-            c, parallel_hierarchy=parallel_hierarchy, 
+            c, parallel_hierarchy=None, # To be removed
             parallel_distribution=c_parallel_distribution,
             grad_mode="manual",
-            grad_parallel_hierarchy=parallel_hierarchy,
             grad_parallel_distribution=c_parallel_distribution
         )
         c = flow.nn.bias_add(c, bias, name="biasadd")
@@ -259,26 +254,23 @@ class GPT2(object):
                 h = norm_2d(h, name="layernorm_f") #[S0, B]
 
                 wte = flow.hierarchical_parallel_cast(
-                        wte, parallel_hierarchy=[2, 2], 
+                        wte, parallel_hierarchy=None, # To be removed 
                         parallel_distribution=["B", "S(0)"],
                         grad_mode="manual",
-                        grad_parallel_hierarchy=[2, 2],
                         grad_parallel_distribution=["B", "S(0)"]
                 ) #cant delete model-AmpWhiteIdentity_2_clone_grad_79
                 h = flow.hierarchical_parallel_cast(
-                        h, parallel_hierarchy=[2, 2], 
+                        h, parallel_hierarchy=None, # To be removed 
                         parallel_distribution=["S(0)", "B"],
                         grad_mode="manual",
-                        grad_parallel_hierarchy=[2, 2],
                         grad_parallel_distribution=["S(0)", "B"]
                 )#for layernorm_f dy is B not P
                 logits = flow.matmul(h, wte, transpose_b=True) #h(S0, B) wte(B, S0) out(S0, S1)  h shape (4096, 768) wte shape (50688, 768) logits shape (4096, 50688)
                 print("h shape", h.shape, "wte shape", wte.shape, "logits shape", logits.shape)
                 logits = flow.hierarchical_parallel_cast(
-                    logits, parallel_hierarchy=[2, 2], 
+                    logits, parallel_hierarchy=None, # To be removed 
                     parallel_distribution=["S(0)", "S(0)"],
                     grad_mode="manual",
-                    grad_parallel_hierarchy=[2, 2],
                     grad_parallel_distribution=["S(0)", "S(1)"]
                 )
         logits = flow.hierarchical_parallel_cast(
