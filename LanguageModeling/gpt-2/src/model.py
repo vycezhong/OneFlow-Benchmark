@@ -407,7 +407,7 @@ class GPT2(object):
                 )
             else:
                 x = flow.hierarchical_parallel_cast(
-                    x, parallel_hierarchy=[2, 2], 
+                    x, parallel_hierarchy=None, # To be removed 
                     parallel_distribution=["S(0)", "B"],
                     grad_mode="manual",
                     grad_parallel_hierarchy=[2, 2],
