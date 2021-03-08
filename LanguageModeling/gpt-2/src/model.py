@@ -217,6 +217,7 @@ class GPT2(object):
         self.attention_dropout = args.attention_dropout
         self.hidden_dropout = args.hidden_dropout
         self.parallel_hierarchy = args.parallel_hierarchy
+        self.machine_device_ids = args.machine_device_ids
         self.is_2d_sbp = len(self.parallel_hierarchy) > 1
         self.use_fp16 = args.use_fp16
         self.use_big_fc = args.use_big_fc
@@ -235,7 +236,7 @@ class GPT2(object):
 
         outputs = {}
         presents = []
-        with flow.scope.placement("gpu", "0:0-3", self.parallel_hierarchy):
+        with flow.scope.placement("gpu", self.machine_device_ids, self.parallel_hierarchy):
             with flow.scope.namespace(self.name):
                 h, wte = self.embedding(x)
                 # h(S0, B) wte(B, S0)

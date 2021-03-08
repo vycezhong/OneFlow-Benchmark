@@ -11,13 +11,18 @@ def init_env(args):
         assert args.num_nodes <= len(args.node_ips)
         flow.env.ctrl_port(args.ctrl_port)
         nodes = []
-        for ip in args.node_ips[: args.num_nodes]:
+        machine_device_ids = []
+        for id, ip in enumerate(args.node_ips[: args.num_nodes]):
             addr_dict = {}
             addr_dict["addr"] = ip
             nodes.append(addr_dict)
+            machine_device_ids.append('{}:0-{}'.format(id, args.gpu_num_per_node - 1))
 
         flow.env.machine(nodes)
-
+    else:
+        machine_device_ids='0:0-{}'.format(args.gpu_num_per_node - 1)
+    
+    args.machine_device_ids = machine_device_ids
     flow.env.log_dir(args.log_dir)
 
 
