@@ -239,7 +239,7 @@ def initialize_model_parallel(args):
     device_num = args.gpu_num_per_node * args.num_nodes
     if device_num == 1:
         print('warning! there is only 1 device, set model parallel size to 1')
-        return [1], [1]
+        return [1, 1]
 
     assert device_num % args.model_parallel_size == 0
     parallel_hierarchy = [device_num // args.model_parallel_size, args.model_parallel_size]
