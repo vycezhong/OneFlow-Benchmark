@@ -169,7 +169,7 @@ class Metric(object):
             f"step={self.metric_dict['step']},"
             f"loss={self.metric_dict['loss']:.5f},"
             f"throughput={self.metric_dict['throughput']:.5f},"
-            f"lantency={self.metric_dict['lantency']:.5f}"
+            f"latency={self.metric_dict['latency']:.5f}"
         )
 
     def step_print_by_table(self):
@@ -178,7 +178,7 @@ class Metric(object):
                 f"| {'step'.ljust(8)} "
                 f"| {'loss'.ljust(10)} "
                 f"| {'throughput'.ljust(10)} "
-                f"| {'lantency'.ljust(10)} "
+                f"| {'latency'.ljust(10)} "
                 "|"
             )
             print(f"| {'-' * 8} | {'-' * 10} | {'-' * 10} | {'-' * 10} |")
@@ -187,7 +187,7 @@ class Metric(object):
             f"| {self.metric_dict['step']:<8d} "
             f"| {self.metric_dict['loss']:<10.5f} "
             f"| {self.metric_dict['throughput']:<10.5f} "
-            f"| {self.metric_dict['lantency']:<10.5f} "
+            f"| {self.metric_dict['latency']:<10.5f} "
             "|"
         )
 
@@ -209,8 +209,8 @@ class Metric(object):
                 elapsed_time = self.timer.split()
                 throughput = self.num_samples / elapsed_time
                 self.update_and_save("throughput", throughput, step)
-                lantency = elapsed_time / self.print_steps
-                self.update_and_save("lantency", lantency, step)
+                latency = elapsed_time / self.print_steps
+                self.update_and_save("latency", latency, step)
                 for key in self.keys:
                     value = self.metric_dict[key] / self.num_samples
                     self.update_and_save(key, value, step, **kwargs)
