@@ -253,13 +253,13 @@ class GPT2(object):
                     grad_mode="manual",
                     grad_parallel_distribution=["S(0)", "S(1)"]
                 )
-        logits = flow.hierarchical_parallel_cast(
-                    logits, parallel_hierarchy=[4,], 
-                    parallel_distribution=["S(0)"],
-                    grad_mode="manual",
-                    grad_parallel_hierarchy=[2, 2],
-                    grad_parallel_distribution=["S(0)", "S(0)"]
-                )
+        # logits = flow.hierarchical_parallel_cast(
+        #             logits, parallel_hierarchy=[4,], 
+        #             parallel_distribution=["S(0)"],
+        #             grad_mode="manual",
+        #             grad_parallel_hierarchy=[2, 2],
+        #             grad_parallel_distribution=["S(0)", "S(0)"]
+        #         )
         outputs["logits"] = logits
         return outputs
 
@@ -290,8 +290,8 @@ class GPT2(object):
         x = flow.hierarchical_parallel_cast(
             x, parallel_hierarchy=None, # To be removed 
             parallel_distribution=act_parallel_distribution,
-            grad_mode="manual",
-            grad_parallel_distribution=["S(0)"]
+            grad_mode="manual", # should be removed
+            grad_parallel_distribution=["S(0)"] # should be removed
         )
         wte_model = flow.hierarchical_parallel_cast(
             wte, parallel_hierarchy=None, # To be removed 
@@ -431,37 +431,36 @@ class GPT2(object):
         assert bs == b * s
         assert v == self.n_vocab
         print("labels", labels.shape, labels.dtype)
-        #labels = flow.hierarchical_parallel_cast(
-        #    labels, parallel_hierarchy=[2, 2], 
-        #    parallel_distribution=["S(0)", "S(0)"],
-        #    grad_mode="manual",
-        #    grad_parallel_hierarchy=[4],
-        #    grad_parallel_distribution=["S(0)"]
-        #)
-        with flow.scope.namespace("loss"):
-            labels = flow.slice(labels, begin=(None, 1), size=(None, s - 1))
-
-            labels = flow.pad(labels, paddings=((0, 0), (0, 1)), constant_value=0.0)
-
-            labels = flow.flatten(labels)
-
-            parallel_loss=False
-            if parallel_loss:
-                # split vocab dim (v)
-                loss = flow.nn.sparse_softmax_cross_entropy_with_logits(
-                    labels=labels,
-                    logits=logits.with_distribute(flow.distribute.split(1)),
+        with flow.scope.placement("gpu", self.machine_device_ids, self.parallel_hierarchy):
+            with flow.scope.namespace("loss"):
+                labels = flow.hierarchical_parallel_cast(
+                    labels, parallel_hierarchy=None, # To be removed 
+                    parallel_distribution=["S(0)", "S(0)"],
                 )
-            else:
-                loss = flow.nn.sparse_softmax_cross_entropy_with_logits(labels, logits)
+                labels = flow.slice(labels, begin=(None, 1), size=(None, s - 1))
 
-            loss = flow.reshape(loss, (b, s))
-            loss = flow.slice(loss, begin=(None, 0), size=(None, s - 1))
-            #loss = flow.hierarchical_parallel_cast(
-            #    loss, parallel_hierarchy=[4], 
-            #    parallel_distribution=["S(0)"],
-            #    grad_mode="manual",
-            #    grad_parallel_hierarchy=[2, 2],
-            #    grad_parallel_distribution=["S(0)", "S(0)"]
-            #    )
-            return flow.math.reduce_mean(loss)
+                labels = flow.pad(labels, paddings=((0, 0), (0, 1)), constant_value=0.0)
+
+                labels = flow.flatten(labels)
+
+                parallel_loss=False
+                if parallel_loss:
+                    # split vocab dim (v)
+                    loss = flow.nn.sparse_softmax_cross_entropy_with_logits(
+                        labels=labels,
+                        logits=logits.with_distribute(flow.distribute.split(1)),
+                    )
+                else:
+                    loss = flow.nn.sparse_softmax_cross_entropy_with_logits(labels, logits)
+
+                loss = flow.reshape(loss, (b, s))
+                loss = flow.slice(loss, begin=(None, 0), size=(None, s - 1))
+
+        loss = flow.hierarchical_parallel_cast(
+                    loss, parallel_hierarchy=None, 
+                    parallel_distribution=["S(0)"],
+                    grad_mode="manual",
+                    grad_parallel_hierarchy=self.parallel_hierarchy,
+                    grad_parallel_distribution=["S(0)", "S(0)"]
+                )
+        return flow.math.reduce_mean(loss)
