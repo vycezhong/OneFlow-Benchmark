@@ -178,7 +178,7 @@ def row_parallel_linear(name, x, nf, is_2d_sbp, *, w_init_stdev=0.02):
         )
         c = flow.matmul(x, weight, name="matmul")
         c = flow.hierarchical_parallel_cast(
-            c, parallel_hierarchy=None, # To be removed
+            c, 
             parallel_distribution=c_parallel_distribution,
             grad_mode="manual",
             grad_parallel_distribution=c_parallel_distribution
@@ -234,13 +234,13 @@ class GPT2(object):
                 h = norm_2d(h, name="layernorm_f") #[S0, B]
 
                 wte = flow.hierarchical_parallel_cast(
-                        wte, parallel_hierarchy=None, # To be removed 
+                        wte, 
                         parallel_distribution=["B", "S(0)"],
                         grad_mode="manual",
                         grad_parallel_distribution=["B", "S(0)"]
                 ) #cant delete model-AmpWhiteIdentity_2_clone_grad_79
                 h = flow.hierarchical_parallel_cast(
-                        h, parallel_hierarchy=None, # To be removed 
+                        h,
                         parallel_distribution=["S(0)", "B"],
                         grad_mode="manual",
                         grad_parallel_distribution=["S(0)", "B"]
@@ -248,16 +248,15 @@ class GPT2(object):
                 logits = flow.matmul(h, wte, transpose_b=True) #h(S0, B) wte(B, S0) out(S0, S1)  h shape (4096, 768) wte shape (50688, 768) logits shape (4096, 50688)
                 print("h shape", h.shape, "wte shape", wte.shape, "logits shape", logits.shape)
                 logits = flow.hierarchical_parallel_cast(
-                    logits, parallel_hierarchy=None, # To be removed 
+                    logits, 
                     parallel_distribution=["S(0)", "S(0)"],
                     grad_mode="manual",
                     grad_parallel_distribution=["S(0)", "S(1)"]
                 )
         # logits = flow.hierarchical_parallel_cast(
-        #             logits, parallel_hierarchy=[4,], 
+        #             logits, 
         #             parallel_distribution=["S(0)"],
         #             grad_mode="manual",
-        #             grad_parallel_hierarchy=[2, 2],
         #             grad_parallel_distribution=["S(0)", "S(0)"]
         #         )
         outputs["logits"] = logits
@@ -288,20 +287,20 @@ class GPT2(object):
             wte = flow.amp_white_identity(wte)
 
         x = flow.hierarchical_parallel_cast(
-            x, parallel_hierarchy=None, # To be removed 
+            x, 
             parallel_distribution=act_parallel_distribution,
             grad_mode="manual", # should be removed
             grad_parallel_distribution=["S(0)"] # should be removed
         )
         wte_model = flow.hierarchical_parallel_cast(
-            wte, parallel_hierarchy=None, # To be removed 
+            wte, 
             parallel_distribution=wte_parallel_distribution,
             grad_mode="manual",
             grad_parallel_distribution=wte_parallel_distribution
         ) #cant delete model-AmpWhiteIdentity_2_clone_grad
         h = flow.gather(wte_model, x, name="embd_gather")
         h = flow.hierarchical_parallel_cast(
-            h, parallel_hierarchy=None, # To be removed 
+            h, 
             parallel_distribution=act_parallel_distribution,
             grad_mode="manual",
             grad_parallel_distribution=act_parallel_distribution
@@ -329,7 +328,7 @@ class GPT2(object):
                 norm2 = norm_2d(x, name="layernorm_2")
                 print("norm2 shape", norm2.shape)
                 norm2 = flow.hierarchical_parallel_cast(
-                    norm2, parallel_hierarchy=None, # To be removed 
+                    norm2, 
                     parallel_distribution=["S(0)", "B"],
                     grad_mode="manual",
                     grad_parallel_distribution=["S(0)", "B"]
@@ -365,7 +364,7 @@ class GPT2(object):
 
         with flow.scope.namespace("attn"):
             x = flow.hierarchical_parallel_cast(
-                x, parallel_hierarchy=None, # To be removed 
+                x, 
                 parallel_distribution=["S(0)", "B"] if self.is_2d_sbp else ['S(0)'],
                 grad_mode="manual",
                 grad_parallel_distribution=["S(0)", "B"] if self.is_2d_sbp else ['S(0)']
@@ -434,7 +433,7 @@ class GPT2(object):
         with flow.scope.placement("gpu", self.machine_device_ids, self.parallel_hierarchy):
             with flow.scope.namespace("loss"):
                 labels = flow.hierarchical_parallel_cast(
-                    labels, parallel_hierarchy=None, # To be removed 
+                    labels, 
                     parallel_distribution=["S(0)", "S(0)"],
                 )
                 labels = flow.slice(labels, begin=(None, 1), size=(None, s - 1))
@@ -457,10 +456,9 @@ class GPT2(object):
                 loss = flow.slice(loss, begin=(None, 0), size=(None, s - 1))
 
         loss = flow.hierarchical_parallel_cast(
-                    loss, parallel_hierarchy=None, 
+                    loss, 
                     parallel_distribution=["S(0)"],
                     grad_mode="manual",
-                    grad_parallel_hierarchy=self.parallel_hierarchy,
                     grad_parallel_distribution=["S(0)", "S(0)"]
                 )
         return flow.math.reduce_mean(loss)
