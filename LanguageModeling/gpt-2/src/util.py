@@ -33,6 +33,7 @@ def init_config(args):
     flow.config.collective_boxing.nccl_fusion_all_gather(True)
     flow.config.collective_boxing.nccl_enable_mixed_fusion(True)
     flow.config.enable_legacy_model_io()
+    flow.config.enable_model_io_v2(True)
     # flow.config.enable_legacy_model_io(True)
 
 
