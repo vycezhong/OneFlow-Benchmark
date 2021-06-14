@@ -1,0 +1,777 @@
+==================================================================
+Running resnet50: num_gpu_per_node = 4, num_nodes = 1.
+==================================================================
+dtype = float32
+gpu_num_per_node = 4
+num_nodes = 1
+node_ips = ['127.0.0.1']
+ctrl_port = 50051
+model = resnet50
+use_fp16 = True
+use_xla = None
+channel_last = True
+pad_output = True
+num_epochs = 90
+model_load_dir = None
+batch_size_per_device = 512
+val_batch_size_per_device = 100
+nccl_fusion_threshold_mb = 4
+nccl_fusion_max_ops = 6
+fuse_bn_relu = True
+fuse_bn_add_relu = True
+gpu_image_decoder = True
+image_path = test_img/tiger.jpg
+num_classes = 1000
+num_examples = 1281167
+num_val_examples = 50000
+rgb_mean = [123.68, 116.779, 103.939]
+rgb_std = [58.393, 57.12, 57.375]
+image_shape = [3, 224, 224]
+label_smoothing = 0.1
+model_save_dir = ./output/snapshots/model_save-20210611212638
+log_dir = ./output
+loss_print_every_n_iter = 100
+image_size = 224
+resize_shorter = 256
+train_data_dir = /data/ILSVRC2012/ofrecord/train
+train_data_part_num = 256
+val_data_dir = /data/ILSVRC2012/ofrecord/validation
+val_data_part_num = 256
+optimizer = sgd
+learning_rate = 2.048
+wd = 3.0517578125e-05
+momentum = 0.875
+lr_decay = cosine
+lr_decay_rate = 0.94
+lr_decay_epochs = 2
+warmup_epochs = 5
+decay_rate = 0.9
+epsilon = 1.0
+gradient_clipping = 0.0
+------------------------------------------------------------------
+Time stamp: 2021-06-11-21:26:38
+Loading data from /data/ILSVRC2012/ofrecord/train
+Optimizer:  SGD
+Loading data from /data/ILSVRC2012/ofrecord/validation
+Init model on demand.
+ 626 iter per epoch...
+train: epoch 0, iter 100, loss: 6.675274, top_1: 0.004536, top_k: 0.016372, samples/s: 4376.281 1623418186.9125392
+train: epoch 0, iter 200, loss: 6.422397, top_1: 0.017002, top_k: 0.055576, samples/s: 4926.388 1623418228.4846241
+train: epoch 0, iter 300, loss: 6.269675, top_1: 0.025718, top_k: 0.080737, samples/s: 4937.847 1623418269.9600904
+train: epoch 0, iter 400, loss: 6.079128, top_1: 0.034985, top_k: 0.104541, samples/s: 4935.191 1623418311.457976
+train: epoch 0, iter 500, loss: 5.910051, top_1: 0.044561, top_k: 0.129165, samples/s: 4928.055 1623418353.0159023
+train: epoch 0, iter 600, loss: 5.802145, top_1: 0.056719, top_k: 0.156992, samples/s: 4921.653 1623418394.62799
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_0.
+validation: epoch 0, iter 125, top_1: 0.067580, top_k: 0.177580, samples/s: 1042.443 1623418452.5455806
+train: epoch 1, iter 100, loss: 5.631128, top_1: 0.076694, top_k: 0.198618, samples/s: 4979.821 1623418508.932792
+train: epoch 1, iter 200, loss: 5.367811, top_1: 0.093105, top_k: 0.231304, samples/s: 4929.146 1623418550.4815848
+train: epoch 1, iter 300, loss: 5.273726, top_1: 0.112012, top_k: 0.266245, samples/s: 4911.221 1623418592.181943
+train: epoch 1, iter 400, loss: 5.022639, top_1: 0.133257, top_k: 0.305415, samples/s: 4886.902 1623418634.089873
+train: epoch 1, iter 500, loss: 4.875607, top_1: 0.152476, top_k: 0.336733, samples/s: 4894.220 1623418675.9352505
+train: epoch 1, iter 600, loss: 4.696141, top_1: 0.175015, top_k: 0.374238, samples/s: 4871.797 1623418717.9730167
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_1.
+validation: epoch 1, iter 125, top_1: 0.144500, top_k: 0.330020, samples/s: 1024.999 1623418776.6865637
+train: epoch 2, iter 100, loss: 4.565282, top_1: 0.202187, top_k: 0.413921, samples/s: 4969.788 1623418833.2341497
+train: epoch 2, iter 200, loss: 4.430545, top_1: 0.221377, top_k: 0.441138, samples/s: 4970.616 1623418874.4363184
+train: epoch 2, iter 300, loss: 4.303891, top_1: 0.240869, top_k: 0.467788, samples/s: 4942.480 1623418915.872951
+train: epoch 2, iter 400, loss: 4.283404, top_1: 0.256929, top_k: 0.488076, samples/s: 4863.727 1623418957.9805899
+train: epoch 2, iter 500, loss: 4.133297, top_1: 0.273154, top_k: 0.509370, samples/s: 4926.569 1623418999.5511332
+train: epoch 2, iter 600, loss: 4.003390, top_1: 0.292710, top_k: 0.530200, samples/s: 4951.573 1623419040.9117365
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_2.
+validation: epoch 2, iter 125, top_1: 0.228580, top_k: 0.453200, samples/s: 1049.561 1623419098.3550577
+train: epoch 3, iter 100, loss: 4.008365, top_1: 0.311665, top_k: 0.553296, samples/s: 4937.638 1623419155.3479307
+train: epoch 3, iter 200, loss: 3.976248, top_1: 0.325391, top_k: 0.570312, samples/s: 4924.639 1623419196.9347837
+train: epoch 3, iter 300, loss: 3.933031, top_1: 0.338008, top_k: 0.584619, samples/s: 4917.214 1623419238.5844312
+train: epoch 3, iter 400, loss: 3.778940, top_1: 0.349019, top_k: 0.595522, samples/s: 4909.556 1623419280.2988968
+train: epoch 3, iter 500, loss: 3.769045, top_1: 0.359185, top_k: 0.607275, samples/s: 4966.000 1623419321.5393498
+train: epoch 3, iter 600, loss: 3.660677, top_1: 0.367310, top_k: 0.616968, samples/s: 4960.147 1623419362.828436
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_3.
+validation: epoch 3, iter 125, top_1: 0.333460, top_k: 0.591860, samples/s: 1036.516 1623419420.862763
+train: epoch 4, iter 100, loss: 3.572007, top_1: 0.385918, top_k: 0.634419, samples/s: 4904.321 1623419478.0415852
+train: epoch 4, iter 200, loss: 3.594478, top_1: 0.388965, top_k: 0.639858, samples/s: 4950.429 1623419519.411838
+train: epoch 4, iter 300, loss: 3.543314, top_1: 0.395615, top_k: 0.645078, samples/s: 4970.753 1623419560.6127567
+train: epoch 4, iter 400, loss: 3.527479, top_1: 0.400039, top_k: 0.649712, samples/s: 4892.279 1623419602.4747105
+train: epoch 4, iter 500, loss: 3.545753, top_1: 0.407671, top_k: 0.656885, samples/s: 4923.753 1623419644.0689085
+train: epoch 4, iter 600, loss: 3.331574, top_1: 0.413901, top_k: 0.663804, samples/s: 4930.021 1623419685.6103125
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_4.
+validation: epoch 4, iter 125, top_1: 0.345640, top_k: 0.603700, samples/s: 1024.443 1623419744.2310495
+train: epoch 5, iter 100, loss: 3.488676, top_1: 0.425645, top_k: 0.676431, samples/s: 4984.525 1623419800.637963
+train: epoch 5, iter 200, loss: 3.352457, top_1: 0.433296, top_k: 0.680933, samples/s: 4929.253 1623419842.1849744
+train: epoch 5, iter 300, loss: 3.379179, top_1: 0.437715, top_k: 0.686035, samples/s: 4916.673 1623419883.8391101
+train: epoch 5, iter 400, loss: 3.337352, top_1: 0.443169, top_k: 0.690869, samples/s: 4975.830 1623419924.9980712
+train: epoch 5, iter 500, loss: 3.358713, top_1: 0.447598, top_k: 0.695352, samples/s: 4948.376 1623419966.3853858
+train: epoch 5, iter 600, loss: 3.222848, top_1: 0.455195, top_k: 0.702329, samples/s: 4961.251 1623420007.6653278
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_5.
+validation: epoch 5, iter 125, top_1: 0.430520, top_k: 0.691860, samples/s: 1036.728 1623420065.7443812
+train: epoch 6, iter 100, loss: 3.285965, top_1: 0.465571, top_k: 0.711128, samples/s: 4940.904 1623420123.5668428
+train: epoch 6, iter 200, loss: 3.226786, top_1: 0.466260, top_k: 0.711074, samples/s: 4942.783 1623420165.0009542
+train: epoch 6, iter 300, loss: 3.182931, top_1: 0.469106, top_k: 0.713560, samples/s: 4903.912 1623420206.763526
+train: epoch 6, iter 400, loss: 3.115528, top_1: 0.474395, top_k: 0.719331, samples/s: 4867.542 1623420248.8381593
+train: epoch 6, iter 500, loss: 3.211779, top_1: 0.477700, top_k: 0.720947, samples/s: 4944.776 1623420290.2556021
+train: epoch 6, iter 600, loss: 3.151292, top_1: 0.482939, top_k: 0.725659, samples/s: 4979.586 1623420331.3835242
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_6.
+validation: epoch 6, iter 125, top_1: 0.429400, top_k: 0.691780, samples/s: 1055.714 1623420388.5442338
+train: epoch 7, iter 100, loss: 3.115137, top_1: 0.490317, top_k: 0.733599, samples/s: 5009.282 1623420444.7983735
+train: epoch 7, iter 200, loss: 3.150250, top_1: 0.490835, top_k: 0.732412, samples/s: 4934.568 1623420486.3014543
+train: epoch 7, iter 300, loss: 3.101483, top_1: 0.490820, top_k: 0.733208, samples/s: 4932.739 1623420527.8200088
+train: epoch 7, iter 400, loss: 3.106352, top_1: 0.493706, top_k: 0.734390, samples/s: 4806.045 1623420570.4329894
+train: epoch 7, iter 500, loss: 3.101823, top_1: 0.496152, top_k: 0.737993, samples/s: 4934.496 1623420611.9367065
+train: epoch 7, iter 600, loss: 3.080282, top_1: 0.502100, top_k: 0.742402, samples/s: 4920.084 1623420653.5620475
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_7.
+validation: epoch 7, iter 125, top_1: 0.446180, top_k: 0.708240, samples/s: 1032.544 1623420711.868
+train: epoch 8, iter 100, loss: 3.020765, top_1: 0.507715, top_k: 0.746099, samples/s: 4988.252 1623420768.4407399
+train: epoch 8, iter 200, loss: 3.019949, top_1: 0.507070, top_k: 0.746816, samples/s: 4959.224 1623420809.7374878
+train: epoch 8, iter 300, loss: 3.054769, top_1: 0.507002, top_k: 0.745327, samples/s: 4967.258 1623420850.967503
+train: epoch 8, iter 400, loss: 3.153857, top_1: 0.507354, top_k: 0.746128, samples/s: 4837.310 1623420893.305065
+train: epoch 8, iter 500, loss: 2.988774, top_1: 0.508608, top_k: 0.747876, samples/s: 4966.720 1623420934.5395257
+train: epoch 8, iter 600, loss: 2.948034, top_1: 0.516216, top_k: 0.754116, samples/s: 4930.659 1623420976.0755486
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_8.
+validation: epoch 8, iter 125, top_1: 0.434860, top_k: 0.696740, samples/s: 1035.006 1623421034.19713
+train: epoch 9, iter 100, loss: 3.023838, top_1: 0.519219, top_k: 0.757163, samples/s: 4945.892 1623421091.0938919
+train: epoch 9, iter 200, loss: 2.974278, top_1: 0.516304, top_k: 0.754839, samples/s: 4874.944 1623421133.104466
+train: epoch 9, iter 300, loss: 2.988122, top_1: 0.521753, top_k: 0.757671, samples/s: 4949.801 1623421174.4798715
+train: epoch 9, iter 400, loss: 2.986182, top_1: 0.521782, top_k: 0.757764, samples/s: 4967.787 1623421215.7054691
+train: epoch 9, iter 500, loss: 2.951964, top_1: 0.518306, top_k: 0.756685, samples/s: 4955.031 1623421257.0372097
+train: epoch 9, iter 600, loss: 2.953251, top_1: 0.532749, top_k: 0.767300, samples/s: 4986.789 1623421298.105692
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_9.
+validation: epoch 9, iter 125, top_1: 0.493240, top_k: 0.754480, samples/s: 1048.317 1623421355.634056
+train: epoch 10, iter 100, loss: 2.917413, top_1: 0.529243, top_k: 0.765044, samples/s: 4990.010 1623421412.0454538
+train: epoch 10, iter 200, loss: 2.968912, top_1: 0.530498, top_k: 0.764746, samples/s: 4954.084 1623421453.3852952
+train: epoch 10, iter 300, loss: 2.924840, top_1: 0.527886, top_k: 0.764736, samples/s: 5005.106 1623421494.3033273
+train: epoch 10, iter 400, loss: 3.004026, top_1: 0.528125, top_k: 0.764126, samples/s: 4957.794 1623421535.612024
+train: epoch 10, iter 500, loss: 2.922597, top_1: 0.529219, top_k: 0.764014, samples/s: 4949.864 1623421576.9868507
+train: epoch 10, iter 600, loss: 2.865257, top_1: 0.538770, top_k: 0.773369, samples/s: 4979.963 1623421618.111669
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_10.
+validation: epoch 10, iter 125, top_1: 0.522880, top_k: 0.777880, samples/s: 1040.073 1623421676.6740584
+train: epoch 11, iter 100, loss: 2.929415, top_1: 0.538115, top_k: 0.770381, samples/s: 4990.540 1623421732.8899689
+train: epoch 11, iter 200, loss: 2.843843, top_1: 0.537241, top_k: 0.771406, samples/s: 4951.276 1623421774.2531564
+train: epoch 11, iter 300, loss: 2.905983, top_1: 0.536338, top_k: 0.770571, samples/s: 4971.424 1623421815.4485233
+train: epoch 11, iter 400, loss: 2.846419, top_1: 0.536519, top_k: 0.771440, samples/s: 4954.264 1623421856.7866113
+train: epoch 11, iter 500, loss: 2.919118, top_1: 0.538022, top_k: 0.770327, samples/s: 4945.296 1623421898.1996944
+train: epoch 11, iter 600, loss: 2.850172, top_1: 0.547339, top_k: 0.778555, samples/s: 4953.266 1623421939.546179
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_11.
+validation: epoch 11, iter 125, top_1: 0.493400, top_k: 0.749900, samples/s: 1039.083 1623421997.4438572
+train: epoch 12, iter 100, loss: 2.853733, top_1: 0.543618, top_k: 0.777041, samples/s: 4926.783 1623422054.2888465
+train: epoch 12, iter 200, loss: 2.906780, top_1: 0.544336, top_k: 0.775996, samples/s: 4867.974 1623422096.3596432
+train: epoch 12, iter 300, loss: 2.881501, top_1: 0.541021, top_k: 0.775249, samples/s: 4880.813 1623422138.3198817
+train: epoch 12, iter 400, loss: 2.864339, top_1: 0.542949, top_k: 0.775664, samples/s: 4989.039 1623422179.3698666
+train: epoch 12, iter 500, loss: 2.859053, top_1: 0.542354, top_k: 0.774595, samples/s: 4934.730 1623422220.871629
+train: epoch 12, iter 600, loss: 2.820832, top_1: 0.553506, top_k: 0.784053, samples/s: 4937.447 1623422262.350577
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_12.
+validation: epoch 12, iter 125, top_1: 0.512200, top_k: 0.762040, samples/s: 1047.955 1623422320.0032904
+train: epoch 13, iter 100, loss: 2.826649, top_1: 0.552759, top_k: 0.782178, samples/s: 5007.401 1623422376.9544153
+train: epoch 13, iter 200, loss: 2.896170, top_1: 0.549614, top_k: 0.782227, samples/s: 4939.523 1623422418.4159582
+train: epoch 13, iter 300, loss: 2.892833, top_1: 0.547158, top_k: 0.778403, samples/s: 4986.254 1623422459.4888241
+train: epoch 13, iter 400, loss: 2.834928, top_1: 0.548237, top_k: 0.780015, samples/s: 4913.619 1623422501.1688645
+train: epoch 13, iter 500, loss: 2.833650, top_1: 0.548672, top_k: 0.780195, samples/s: 4923.486 1623422542.765412
+train: epoch 13, iter 600, loss: 2.832886, top_1: 0.558262, top_k: 0.787080, samples/s: 4964.050 1623422584.0220659
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_13.
+validation: epoch 13, iter 125, top_1: 0.518440, top_k: 0.767940, samples/s: 1039.053 1623422642.409174
+train: epoch 14, iter 100, loss: 2.815324, top_1: 0.555737, top_k: 0.784639, samples/s: 4910.574 1623422699.706202
+train: epoch 14, iter 200, loss: 2.778882, top_1: 0.554741, top_k: 0.785815, samples/s: 4962.661 1623422740.974563
+train: epoch 14, iter 300, loss: 2.741601, top_1: 0.553184, top_k: 0.784580, samples/s: 4968.359 1623422782.1952262
+train: epoch 14, iter 400, loss: 2.717628, top_1: 0.553140, top_k: 0.784722, samples/s: 5005.331 1623422823.1116097
+train: epoch 14, iter 500, loss: 2.767580, top_1: 0.555981, top_k: 0.786738, samples/s: 4971.976 1623422864.3024726
+train: epoch 14, iter 600, loss: 2.735496, top_1: 0.562935, top_k: 0.791709, samples/s: 4890.284 1623422906.1814373
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_14.
+validation: epoch 14, iter 125, top_1: 0.546640, top_k: 0.790660, samples/s: 1029.522 1623422964.589581
+train: epoch 15, iter 100, loss: 2.677399, top_1: 0.559775, top_k: 0.788579, samples/s: 4946.951 1623423023.1685266
+train: epoch 15, iter 200, loss: 2.835252, top_1: 0.560913, top_k: 0.790371, samples/s: 4907.671 1623423064.8991437
+train: epoch 15, iter 300, loss: 2.729544, top_1: 0.557339, top_k: 0.787148, samples/s: 4950.585 1623423106.2679553
+train: epoch 15, iter 400, loss: 2.853456, top_1: 0.559126, top_k: 0.788491, samples/s: 4996.276 1623423147.258487
+train: epoch 15, iter 500, loss: 2.640998, top_1: 0.560034, top_k: 0.789722, samples/s: 4930.260 1623423188.7978735
+train: epoch 15, iter 600, loss: 2.765379, top_1: 0.572842, top_k: 0.798018, samples/s: 4979.961 1623423229.922708
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_15.
+validation: epoch 15, iter 125, top_1: 0.550500, top_k: 0.799100, samples/s: 1049.283 1623423287.360292
+train: epoch 16, iter 100, loss: 2.808416, top_1: 0.563799, top_k: 0.791899, samples/s: 4964.707 1623423344.2451694
+train: epoch 16, iter 200, loss: 2.809842, top_1: 0.563403, top_k: 0.791216, samples/s: 4969.329 1623423385.4580874
+train: epoch 16, iter 300, loss: 2.742072, top_1: 0.562397, top_k: 0.791621, samples/s: 4909.235 1623423427.175261
+train: epoch 16, iter 400, loss: 2.801832, top_1: 0.558252, top_k: 0.789351, samples/s: 4970.481 1623423468.3785062
+train: epoch 16, iter 500, loss: 2.751605, top_1: 0.565532, top_k: 0.792617, samples/s: 4976.448 1623423509.5324981
+train: epoch 16, iter 600, loss: 2.692821, top_1: 0.571919, top_k: 0.796924, samples/s: 4993.578 1623423550.545098
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_16.
+validation: epoch 16, iter 125, top_1: 0.524100, top_k: 0.777020, samples/s: 1049.864 1623423608.3674812
+train: epoch 17, iter 100, loss: 2.779431, top_1: 0.567007, top_k: 0.794727, samples/s: 4951.694 1623423665.4966834
+train: epoch 17, iter 200, loss: 2.786706, top_1: 0.567061, top_k: 0.795483, samples/s: 4958.559 1623423706.798952
+train: epoch 17, iter 300, loss: 2.732213, top_1: 0.566924, top_k: 0.793833, samples/s: 4976.267 1623423747.9542763
+train: epoch 17, iter 400, loss: 2.742689, top_1: 0.563701, top_k: 0.791987, samples/s: 4997.282 1623423788.936543
+train: epoch 17, iter 500, loss: 2.701116, top_1: 0.570786, top_k: 0.797368, samples/s: 4902.174 1623423830.71393
+train: epoch 17, iter 600, loss: 2.796524, top_1: 0.572676, top_k: 0.799063, samples/s: 4964.185 1623423871.9694498
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_17.
+validation: epoch 17, iter 125, top_1: 0.549420, top_k: 0.798020, samples/s: 1032.339 1623423930.4872916
+train: epoch 18, iter 100, loss: 2.729626, top_1: 0.570698, top_k: 0.798057, samples/s: 4936.363 1623423987.4463012
+train: epoch 18, iter 200, loss: 2.762830, top_1: 0.570791, top_k: 0.797598, samples/s: 4931.768 1623424028.9728706
+train: epoch 18, iter 300, loss: 2.718307, top_1: 0.566299, top_k: 0.794956, samples/s: 4972.460 1623424070.1597195
+train: epoch 18, iter 400, loss: 2.725442, top_1: 0.570757, top_k: 0.797349, samples/s: 4996.536 1623424111.1481547
+train: epoch 18, iter 500, loss: 2.684581, top_1: 0.574106, top_k: 0.798701, samples/s: 4932.448 1623424152.6690912
+train: epoch 18, iter 600, loss: 2.696140, top_1: 0.576504, top_k: 0.801226, samples/s: 4987.253 1623424193.7337823
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_18.
+validation: epoch 18, iter 125, top_1: 0.552240, top_k: 0.795480, samples/s: 1049.974 1623424251.2041636
+train: epoch 19, iter 100, loss: 2.678477, top_1: 0.575088, top_k: 0.800850, samples/s: 4981.587 1623424308.7564692
+train: epoch 19, iter 200, loss: 2.752965, top_1: 0.575298, top_k: 0.800044, samples/s: 4967.979 1623424349.9804282
+train: epoch 19, iter 300, loss: 2.643144, top_1: 0.572070, top_k: 0.799043, samples/s: 4882.080 1623424391.9297533
+train: epoch 19, iter 400, loss: 2.704888, top_1: 0.572524, top_k: 0.798794, samples/s: 4937.158 1623424433.411103
+train: epoch 19, iter 500, loss: 2.663601, top_1: 0.577593, top_k: 0.803135, samples/s: 4887.227 1623424475.3162632
+train: epoch 19, iter 600, loss: 2.683651, top_1: 0.580229, top_k: 0.805366, samples/s: 4896.190 1623424517.1446996
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_19.
+validation: epoch 19, iter 125, top_1: 0.528800, top_k: 0.783260, samples/s: 1049.845 1623424574.7780147
+train: epoch 20, iter 100, loss: 2.726085, top_1: 0.577910, top_k: 0.802798, samples/s: 4998.943 1623424631.1179504
+train: epoch 20, iter 200, loss: 2.727917, top_1: 0.576562, top_k: 0.803330, samples/s: 4975.668 1623424672.278179
+train: epoch 20, iter 300, loss: 2.650760, top_1: 0.575962, top_k: 0.799736, samples/s: 4967.580 1623424713.5054917
+train: epoch 20, iter 400, loss: 2.730120, top_1: 0.574727, top_k: 0.800166, samples/s: 4950.638 1623424754.8739355
+train: epoch 20, iter 500, loss: 2.650013, top_1: 0.581963, top_k: 0.804624, samples/s: 4959.683 1623424796.1668885
+train: epoch 20, iter 600, loss: 2.681353, top_1: 0.584048, top_k: 0.807275, samples/s: 4971.688 1623424837.3601186
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_20.
+validation: epoch 20, iter 125, top_1: 0.538600, top_k: 0.787900, samples/s: 1021.262 1623424896.6227987
+train: epoch 21, iter 100, loss: 2.666706, top_1: 0.582803, top_k: 0.806079, samples/s: 4955.787 1623424953.7646039
+train: epoch 21, iter 200, loss: 2.722841, top_1: 0.579390, top_k: 0.803457, samples/s: 4920.361 1623424995.3874643
+train: epoch 21, iter 300, loss: 2.668359, top_1: 0.578594, top_k: 0.803135, samples/s: 4964.900 1623425036.637054
+train: epoch 21, iter 400, loss: 2.665064, top_1: 0.578359, top_k: 0.801880, samples/s: 4978.687 1623425077.7723968
+train: epoch 21, iter 500, loss: 2.670889, top_1: 0.583550, top_k: 0.807617, samples/s: 4939.124 1623425119.2372174
+train: epoch 21, iter 600, loss: 2.673060, top_1: 0.585898, top_k: 0.808682, samples/s: 4968.322 1623425160.4583802
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_21.
+validation: epoch 21, iter 125, top_1: 0.510860, top_k: 0.759780, samples/s: 1055.204 1623425217.6548574
+train: epoch 22, iter 100, loss: 2.670587, top_1: 0.584668, top_k: 0.806768, samples/s: 4965.148 1623425274.25496
+train: epoch 22, iter 200, loss: 2.693079, top_1: 0.582227, top_k: 0.805547, samples/s: 4962.462 1623425315.524671
+train: epoch 22, iter 300, loss: 2.688070, top_1: 0.579927, top_k: 0.803687, samples/s: 4898.107 1623425357.336735
+train: epoch 22, iter 400, loss: 2.666477, top_1: 0.582637, top_k: 0.806201, samples/s: 4948.910 1623425398.71958
+train: epoch 22, iter 500, loss: 2.677589, top_1: 0.587803, top_k: 0.809331, samples/s: 4972.262 1623425439.9080777
+train: epoch 22, iter 600, loss: 2.640599, top_1: 0.589629, top_k: 0.810767, samples/s: 4965.066 1623425481.1562827
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_22.
+validation: epoch 22, iter 125, top_1: 0.582100, top_k: 0.822260, samples/s: 1049.766 1623425538.5951328
+train: epoch 23, iter 100, loss: 2.657620, top_1: 0.585898, top_k: 0.809380, samples/s: 4935.040 1623425595.4162333
+train: epoch 23, iter 200, loss: 2.673939, top_1: 0.584463, top_k: 0.806787, samples/s: 4959.176 1623425636.7133467
+train: epoch 23, iter 300, loss: 2.710259, top_1: 0.584722, top_k: 0.806792, samples/s: 4944.261 1623425678.135011
+train: epoch 23, iter 400, loss: 2.686226, top_1: 0.583823, top_k: 0.806929, samples/s: 4872.801 1623425720.1642234
+train: epoch 23, iter 500, loss: 2.700534, top_1: 0.593657, top_k: 0.814565, samples/s: 4978.853 1623425761.2981827
+train: epoch 23, iter 600, loss: 2.629922, top_1: 0.590669, top_k: 0.811567, samples/s: 4977.109 1623425802.4465752
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_23.
+validation: epoch 23, iter 125, top_1: 0.574540, top_k: 0.817360, samples/s: 1038.097 1623425860.41275
+train: epoch 24, iter 100, loss: 2.747045, top_1: 0.588784, top_k: 0.810981, samples/s: 4867.223 1623425918.1680458
+train: epoch 24, iter 200, loss: 2.702481, top_1: 0.589780, top_k: 0.810942, samples/s: 4974.322 1623425959.339392
+train: epoch 24, iter 300, loss: 2.671744, top_1: 0.588262, top_k: 0.809985, samples/s: 4949.606 1623426000.7164447
+train: epoch 24, iter 400, loss: 2.676179, top_1: 0.588115, top_k: 0.809644, samples/s: 4902.146 1623426042.4940917
+train: epoch 24, iter 500, loss: 2.712766, top_1: 0.596123, top_k: 0.817363, samples/s: 4983.552 1623426083.5892794
+train: epoch 24, iter 600, loss: 2.635179, top_1: 0.592051, top_k: 0.812246, samples/s: 4983.014 1623426124.6889076
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_24.
+validation: epoch 24, iter 125, top_1: 0.574640, top_k: 0.814600, samples/s: 1056.456 1623426181.8695726
+train: epoch 25, iter 100, loss: 2.582974, top_1: 0.590488, top_k: 0.812231, samples/s: 4992.921 1623426238.269775
+train: epoch 25, iter 200, loss: 2.727207, top_1: 0.590581, top_k: 0.812080, samples/s: 4960.684 1623426279.5543938
+train: epoch 25, iter 300, loss: 2.624900, top_1: 0.589805, top_k: 0.810571, samples/s: 4932.260 1623426321.076867
+train: epoch 25, iter 400, loss: 2.675260, top_1: 0.588765, top_k: 0.810322, samples/s: 4814.409 1623426363.615827
+train: epoch 25, iter 500, loss: 2.606357, top_1: 0.599263, top_k: 0.819155, samples/s: 4922.195 1623426405.223279
+train: epoch 25, iter 600, loss: 2.671062, top_1: 0.595376, top_k: 0.815664, samples/s: 4939.510 1623426446.6849062
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_25.
+validation: epoch 25, iter 125, top_1: 0.575020, top_k: 0.814460, samples/s: 1048.500 1623426504.0775678
+train: epoch 26, iter 100, loss: 2.648146, top_1: 0.594814, top_k: 0.814214, samples/s: 4995.374 1623426560.1624162
+train: epoch 26, iter 200, loss: 2.693030, top_1: 0.593228, top_k: 0.813774, samples/s: 4993.263 1623426601.177775
+train: epoch 26, iter 300, loss: 2.592165, top_1: 0.592085, top_k: 0.813408, samples/s: 4979.830 1623426642.303638
+train: epoch 26, iter 400, loss: 2.648556, top_1: 0.593594, top_k: 0.813389, samples/s: 4978.856 1623426683.4375365
+train: epoch 26, iter 500, loss: 2.649338, top_1: 0.600503, top_k: 0.819565, samples/s: 4990.844 1623426724.4726737
+train: epoch 26, iter 600, loss: 2.610170, top_1: 0.597783, top_k: 0.817676, samples/s: 4981.461 1623426765.5851097
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_26.
+validation: epoch 26, iter 125, top_1: 0.565400, top_k: 0.809720, samples/s: 1015.244 1623426824.640277
+train: epoch 27, iter 100, loss: 2.665462, top_1: 0.597607, top_k: 0.816650, samples/s: 4895.860 1623426882.064807
+train: epoch 27, iter 200, loss: 2.573385, top_1: 0.595933, top_k: 0.815796, samples/s: 4950.431 1623426923.4349473
+train: epoch 27, iter 300, loss: 2.647394, top_1: 0.595806, top_k: 0.815625, samples/s: 4956.221 1623426964.7567456
+train: epoch 27, iter 400, loss: 2.624910, top_1: 0.597441, top_k: 0.817573, samples/s: 4865.442 1623427006.8495238
+train: epoch 27, iter 500, loss: 2.553198, top_1: 0.604707, top_k: 0.822554, samples/s: 4985.378 1623427047.9296947
+train: epoch 27, iter 600, loss: 2.579024, top_1: 0.600703, top_k: 0.819644, samples/s: 4940.869 1623427089.3798745
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_27.
+validation: epoch 27, iter 125, top_1: 0.571900, top_k: 0.812520, samples/s: 1050.288 1623427146.8629951
+train: epoch 28, iter 100, loss: 2.586308, top_1: 0.597021, top_k: 0.815713, samples/s: 4980.095 1623427206.476102
+train: epoch 28, iter 200, loss: 2.628823, top_1: 0.599814, top_k: 0.816655, samples/s: 4963.004 1623427247.741428
+train: epoch 28, iter 300, loss: 2.578941, top_1: 0.595801, top_k: 0.816455, samples/s: 4922.868 1623427289.3431869
+train: epoch 28, iter 400, loss: 2.569987, top_1: 0.599497, top_k: 0.817134, samples/s: 4933.518 1623427330.8551545
+train: epoch 28, iter 500, loss: 2.528851, top_1: 0.606362, top_k: 0.822603, samples/s: 4955.493 1623427372.1830325
+train: epoch 28, iter 600, loss: 2.535275, top_1: 0.603145, top_k: 0.820698, samples/s: 4911.431 1623427413.881693
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_28.
+validation: epoch 28, iter 125, top_1: 0.565220, top_k: 0.807860, samples/s: 1049.292 1623427471.3435907
+train: epoch 29, iter 100, loss: 2.584420, top_1: 0.601562, top_k: 0.818721, samples/s: 4961.313 1623427528.2131855
+train: epoch 29, iter 200, loss: 2.594227, top_1: 0.599219, top_k: 0.817485, samples/s: 4995.700 1623427569.2083337
+train: epoch 29, iter 300, loss: 2.635128, top_1: 0.598691, top_k: 0.817012, samples/s: 4997.404 1623427610.189645
+train: epoch 29, iter 400, loss: 2.559947, top_1: 0.605820, top_k: 0.822681, samples/s: 4980.353 1623427651.311205
+train: epoch 29, iter 500, loss: 2.570564, top_1: 0.610620, top_k: 0.826401, samples/s: 4964.695 1623427692.5625076
+train: epoch 29, iter 600, loss: 2.599856, top_1: 0.604312, top_k: 0.822695, samples/s: 4935.178 1623427734.060507
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_29.
+validation: epoch 29, iter 125, top_1: 0.591840, top_k: 0.825840, samples/s: 1043.030 1623427792.1551058
+train: epoch 30, iter 100, loss: 2.563835, top_1: 0.603828, top_k: 0.821211, samples/s: 4917.031 1623427849.274086
+train: epoch 30, iter 200, loss: 2.614118, top_1: 0.602285, top_k: 0.820679, samples/s: 4881.120 1623427891.231656
+train: epoch 30, iter 300, loss: 2.559878, top_1: 0.602271, top_k: 0.819395, samples/s: 4965.815 1623427932.473608
+train: epoch 30, iter 400, loss: 2.535626, top_1: 0.608804, top_k: 0.825830, samples/s: 4989.129 1623427973.5228488
+train: epoch 30, iter 500, loss: 2.567984, top_1: 0.609141, top_k: 0.825957, samples/s: 4907.903 1623428015.2514954
+train: epoch 30, iter 600, loss: 2.587250, top_1: 0.608774, top_k: 0.825376, samples/s: 4955.805 1623428056.5767434
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_30.
+validation: epoch 30, iter 125, top_1: 0.582020, top_k: 0.820920, samples/s: 1057.214 1623428113.6841063
+train: epoch 31, iter 100, loss: 2.529550, top_1: 0.606206, top_k: 0.823604, samples/s: 5030.283 1623428169.850614
+train: epoch 31, iter 200, loss: 2.558326, top_1: 0.603638, top_k: 0.822178, samples/s: 4980.829 1623428210.9683192
+train: epoch 31, iter 300, loss: 2.540812, top_1: 0.603418, top_k: 0.821953, samples/s: 4906.259 1623428252.7108948
+train: epoch 31, iter 400, loss: 2.520260, top_1: 0.610161, top_k: 0.826392, samples/s: 4858.597 1623428294.8629584
+train: epoch 31, iter 500, loss: 2.533661, top_1: 0.613608, top_k: 0.828994, samples/s: 4825.450 1623428337.3046093
+train: epoch 31, iter 600, loss: 2.523991, top_1: 0.611162, top_k: 0.825732, samples/s: 4938.587 1623428378.7739437
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_31.
+validation: epoch 31, iter 125, top_1: 0.580840, top_k: 0.820880, samples/s: 1049.729 1623428436.2595088
+train: epoch 32, iter 100, loss: 2.564165, top_1: 0.607744, top_k: 0.824883, samples/s: 4895.710 1623428493.9326193
+train: epoch 32, iter 200, loss: 2.548383, top_1: 0.607383, top_k: 0.823086, samples/s: 5000.750 1623428534.8864825
+train: epoch 32, iter 300, loss: 2.532418, top_1: 0.609155, top_k: 0.824585, samples/s: 4887.148 1623428576.792314
+train: epoch 32, iter 400, loss: 2.535065, top_1: 0.613545, top_k: 0.828271, samples/s: 4982.631 1623428617.8950984
+train: epoch 32, iter 500, loss: 2.579560, top_1: 0.614907, top_k: 0.829741, samples/s: 4968.160 1623428659.1176884
+train: epoch 32, iter 600, loss: 2.575781, top_1: 0.614116, top_k: 0.827915, samples/s: 4904.496 1623428700.8752174
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_32.
+validation: epoch 32, iter 125, top_1: 0.589540, top_k: 0.825260, samples/s: 1027.583 1623428759.3785658
+train: epoch 33, iter 100, loss: 2.553074, top_1: 0.612568, top_k: 0.826562, samples/s: 4975.098 1623428817.1210732
+train: epoch 33, iter 200, loss: 2.562217, top_1: 0.610889, top_k: 0.826831, samples/s: 4901.227 1623428858.906495
+train: epoch 33, iter 300, loss: 2.547495, top_1: 0.609072, top_k: 0.826406, samples/s: 4982.004 1623428900.0144722
+train: epoch 33, iter 400, loss: 2.458969, top_1: 0.619009, top_k: 0.831582, samples/s: 4998.127 1623428940.989805
+train: epoch 33, iter 500, loss: 2.570761, top_1: 0.615244, top_k: 0.829580, samples/s: 4914.319 1623428982.6639335
+train: epoch 33, iter 600, loss: 2.568325, top_1: 0.613564, top_k: 0.828291, samples/s: 4852.820 1623429024.8662882
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_33.
+validation: epoch 33, iter 125, top_1: 0.576180, top_k: 0.815900, samples/s: 1041.346 1623429082.7821612
+train: epoch 34, iter 100, loss: 2.528347, top_1: 0.613740, top_k: 0.828203, samples/s: 5005.934 1623429141.6803975
+train: epoch 34, iter 200, loss: 2.514792, top_1: 0.612598, top_k: 0.827607, samples/s: 4955.535 1623429183.007921
+train: epoch 34, iter 300, loss: 2.556468, top_1: 0.611196, top_k: 0.826650, samples/s: 4987.624 1623429224.0695589
+train: epoch 34, iter 400, loss: 2.590198, top_1: 0.622188, top_k: 0.834004, samples/s: 4946.881 1623429265.4693995
+train: epoch 34, iter 500, loss: 2.532474, top_1: 0.620981, top_k: 0.833071, samples/s: 4914.609 1623429307.141053
+train: epoch 34, iter 600, loss: 2.567011, top_1: 0.618022, top_k: 0.830703, samples/s: 4937.079 1623429348.6230702
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_34.
+validation: epoch 34, iter 125, top_1: 0.576280, top_k: 0.816580, samples/s: 1049.559 1623429406.0308497
+train: epoch 35, iter 100, loss: 2.516055, top_1: 0.616763, top_k: 0.830444, samples/s: 5006.132 1623429462.3487859
+train: epoch 35, iter 200, loss: 2.533236, top_1: 0.613906, top_k: 0.828706, samples/s: 4994.867 1623429503.3508399
+train: epoch 35, iter 300, loss: 2.547533, top_1: 0.613315, top_k: 0.828149, samples/s: 4987.961 1623429544.409693
+train: epoch 35, iter 400, loss: 2.460985, top_1: 0.627759, top_k: 0.839263, samples/s: 4934.202 1623429585.91592
+train: epoch 35, iter 500, loss: 2.565659, top_1: 0.625337, top_k: 0.836328, samples/s: 4987.625 1623429626.9775212
+train: epoch 35, iter 600, loss: 2.520028, top_1: 0.619771, top_k: 0.833081, samples/s: 4904.018 1623429668.7391956
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_35.
+validation: epoch 35, iter 125, top_1: 0.540060, top_k: 0.783700, samples/s: 1034.105 1623429726.902514
+train: epoch 36, iter 100, loss: 2.565614, top_1: 0.619531, top_k: 0.831987, samples/s: 4952.440 1623429784.1073558
+train: epoch 36, iter 200, loss: 2.539916, top_1: 0.617456, top_k: 0.831484, samples/s: 4979.936 1623429825.2324278
+train: epoch 36, iter 300, loss: 2.456187, top_1: 0.618926, top_k: 0.831729, samples/s: 4972.442 1623429866.4193747
+train: epoch 36, iter 400, loss: 2.451953, top_1: 0.629346, top_k: 0.840049, samples/s: 4959.715 1623429907.7120507
+train: epoch 36, iter 500, loss: 2.516513, top_1: 0.624312, top_k: 0.836558, samples/s: 4969.751 1623429948.9213579
+train: epoch 36, iter 600, loss: 2.485206, top_1: 0.625127, top_k: 0.836636, samples/s: 4980.287 1623429990.0434918
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_36.
+validation: epoch 36, iter 125, top_1: 0.601880, top_k: 0.833660, samples/s: 1041.721 1623430047.8989925
+train: epoch 37, iter 100, loss: 2.526835, top_1: 0.622476, top_k: 0.833340, samples/s: 5016.674 1623430104.0264623
+train: epoch 37, iter 200, loss: 2.476499, top_1: 0.619575, top_k: 0.832349, samples/s: 4965.019 1623430145.2750537
+train: epoch 37, iter 300, loss: 2.442092, top_1: 0.621934, top_k: 0.834229, samples/s: 4919.274 1623430186.907196
+train: epoch 37, iter 400, loss: 2.473647, top_1: 0.630723, top_k: 0.839775, samples/s: 4983.082 1623430228.0062692
+train: epoch 37, iter 500, loss: 2.456703, top_1: 0.628823, top_k: 0.838550, samples/s: 4945.378 1623430269.4188766
+train: epoch 37, iter 600, loss: 2.516360, top_1: 0.624673, top_k: 0.836079, samples/s: 4927.152 1623430310.9842656
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_37.
+validation: epoch 37, iter 125, top_1: 0.605720, top_k: 0.837040, samples/s: 1050.580 1623430368.48719
+train: epoch 38, iter 100, loss: 2.447135, top_1: 0.622632, top_k: 0.835010, samples/s: 4894.089 1623430425.983505
+train: epoch 38, iter 200, loss: 2.554617, top_1: 0.623838, top_k: 0.835791, samples/s: 5024.272 1623430466.7456205
+train: epoch 38, iter 300, loss: 2.479882, top_1: 0.626997, top_k: 0.835166, samples/s: 4992.807 1623430507.7646346
+train: epoch 38, iter 400, loss: 2.463253, top_1: 0.633804, top_k: 0.842139, samples/s: 4964.662 1623430549.0162058
+train: epoch 38, iter 500, loss: 2.489363, top_1: 0.631318, top_k: 0.840601, samples/s: 4975.934 1623430590.1742969
+train: epoch 38, iter 600, loss: 2.487442, top_1: 0.630127, top_k: 0.839771, samples/s: 4898.419 1623430631.9838657
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_38.
+validation: epoch 38, iter 125, top_1: 0.584660, top_k: 0.817720, samples/s: 1022.627 1623430690.6599913
+train: epoch 39, iter 100, loss: 2.481245, top_1: 0.626616, top_k: 0.836851, samples/s: 4931.921 1623430747.4446266
+train: epoch 39, iter 200, loss: 2.475745, top_1: 0.625327, top_k: 0.835737, samples/s: 4962.130 1623430788.7172313
+train: epoch 39, iter 300, loss: 2.473712, top_1: 0.629326, top_k: 0.839272, samples/s: 4930.982 1623430830.2505388
+train: epoch 39, iter 400, loss: 2.476580, top_1: 0.637217, top_k: 0.844546, samples/s: 4920.627 1623430871.8712542
+train: epoch 39, iter 500, loss: 2.456734, top_1: 0.633081, top_k: 0.841050, samples/s: 4998.633 1623430912.8424525
+train: epoch 39, iter 600, loss: 2.454542, top_1: 0.631216, top_k: 0.840796, samples/s: 5011.206 1623430953.710855
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_39.
+validation: epoch 39, iter 125, top_1: 0.616660, top_k: 0.848600, samples/s: 1052.345 1623431011.0662546
+train: epoch 40, iter 100, loss: 2.443887, top_1: 0.630503, top_k: 0.839536, samples/s: 4962.919 1623431067.9171238
+train: epoch 40, iter 200, loss: 2.470826, top_1: 0.628057, top_k: 0.837739, samples/s: 4924.931 1623431109.501468
+train: epoch 40, iter 300, loss: 2.431060, top_1: 0.633101, top_k: 0.841860, samples/s: 4943.431 1623431150.9301817
+train: epoch 40, iter 400, loss: 2.473636, top_1: 0.640303, top_k: 0.847617, samples/s: 4950.311 1623431192.3014686
+train: epoch 40, iter 500, loss: 2.459661, top_1: 0.635371, top_k: 0.843516, samples/s: 4966.551 1623431233.537218
+train: epoch 40, iter 600, loss: 2.465279, top_1: 0.633794, top_k: 0.842334, samples/s: 4877.879 1623431275.5227742
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_40.
+validation: epoch 40, iter 125, top_1: 0.608700, top_k: 0.838380, samples/s: 1052.099 1623431332.8473282
+train: epoch 41, iter 100, loss: 2.527917, top_1: 0.630117, top_k: 0.840337, samples/s: 4913.891 1623431389.96309
+train: epoch 41, iter 200, loss: 2.449571, top_1: 0.633369, top_k: 0.841221, samples/s: 5003.771 1623431430.8922138
+train: epoch 41, iter 300, loss: 2.445706, top_1: 0.637925, top_k: 0.844404, samples/s: 5003.004 1623431471.827622
+train: epoch 41, iter 400, loss: 2.398423, top_1: 0.644033, top_k: 0.847876, samples/s: 5011.967 1623431512.6898365
+train: epoch 41, iter 500, loss: 2.445875, top_1: 0.639961, top_k: 0.845869, samples/s: 4975.805 1623431553.849159
+train: epoch 41, iter 600, loss: 2.439942, top_1: 0.639697, top_k: 0.845859, samples/s: 4901.138 1623431595.635296
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_41.
+validation: epoch 41, iter 125, top_1: 0.591520, top_k: 0.826260, samples/s: 1038.128 1623431653.6160903
+train: epoch 42, iter 100, loss: 2.485468, top_1: 0.634722, top_k: 0.843862, samples/s: 4961.735 1623431710.3727424
+train: epoch 42, iter 200, loss: 2.508173, top_1: 0.634272, top_k: 0.843389, samples/s: 4983.163 1623431751.4711375
+train: epoch 42, iter 300, loss: 2.532662, top_1: 0.643013, top_k: 0.848721, samples/s: 4984.842 1623431792.5556855
+train: epoch 42, iter 400, loss: 2.403612, top_1: 0.642197, top_k: 0.848174, samples/s: 4967.742 1623431833.7816534
+train: epoch 42, iter 500, loss: 2.474063, top_1: 0.640957, top_k: 0.848955, samples/s: 4925.204 1623431875.363695
+train: epoch 42, iter 600, loss: 2.432873, top_1: 0.640020, top_k: 0.846011, samples/s: 4945.324 1623431916.7765687
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_42.
+validation: epoch 42, iter 125, top_1: 0.608680, top_k: 0.837580, samples/s: 1049.062 1623431974.34415
+train: epoch 43, iter 100, loss: 2.459528, top_1: 0.641133, top_k: 0.846860, samples/s: 4957.816 1623432031.2334628
+train: epoch 43, iter 200, loss: 2.483950, top_1: 0.635859, top_k: 0.843086, samples/s: 4971.871 1623432072.4251704
+train: epoch 43, iter 300, loss: 2.375828, top_1: 0.645127, top_k: 0.849116, samples/s: 4969.921 1623432113.6330686
+train: epoch 43, iter 400, loss: 2.458778, top_1: 0.647837, top_k: 0.850806, samples/s: 4939.511 1623432155.0946822
+train: epoch 43, iter 500, loss: 2.384675, top_1: 0.645679, top_k: 0.850698, samples/s: 4949.978 1623432196.468578
+train: epoch 43, iter 600, loss: 2.380228, top_1: 0.643813, top_k: 0.848633, samples/s: 5023.787 1623432237.234639
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_43.
+validation: epoch 43, iter 125, top_1: 0.627440, top_k: 0.849120, samples/s: 1037.586 1623432295.2868726
+train: epoch 44, iter 100, loss: 2.418614, top_1: 0.641865, top_k: 0.847573, samples/s: 4993.623 1623432351.4542284
+train: epoch 44, iter 200, loss: 2.446126, top_1: 0.641040, top_k: 0.846167, samples/s: 4983.997 1623432392.5456774
+train: epoch 44, iter 300, loss: 2.344881, top_1: 0.650620, top_k: 0.852793, samples/s: 4958.502 1623432433.84847
+train: epoch 44, iter 400, loss: 2.357240, top_1: 0.649629, top_k: 0.852490, samples/s: 4981.973 1623432474.956679
+train: epoch 44, iter 500, loss: 2.399048, top_1: 0.646987, top_k: 0.851182, samples/s: 4912.831 1623432516.643444
+train: epoch 44, iter 600, loss: 2.398770, top_1: 0.644453, top_k: 0.849316, samples/s: 4929.199 1623432558.1917722
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_44.
+validation: epoch 44, iter 125, top_1: 0.631700, top_k: 0.857400, samples/s: 1043.406 1623432615.9773283
+train: epoch 45, iter 100, loss: 2.448693, top_1: 0.645742, top_k: 0.849468, samples/s: 4994.174 1623432672.6918957
+train: epoch 45, iter 200, loss: 2.458553, top_1: 0.645308, top_k: 0.849644, samples/s: 5001.075 1623432713.643095
+train: epoch 45, iter 300, loss: 2.377132, top_1: 0.655728, top_k: 0.855869, samples/s: 4977.862 1623432754.7852702
+train: epoch 45, iter 400, loss: 2.410229, top_1: 0.651406, top_k: 0.853833, samples/s: 4923.787 1623432796.3793187
+train: epoch 45, iter 500, loss: 2.413973, top_1: 0.652568, top_k: 0.853560, samples/s: 4920.127 1623432838.0042138
+train: epoch 45, iter 600, loss: 2.403627, top_1: 0.650171, top_k: 0.852490, samples/s: 4991.194 1623432879.0364783
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_45.
+validation: epoch 45, iter 125, top_1: 0.626280, top_k: 0.850460, samples/s: 1047.358 1623432936.5671086
+train: epoch 46, iter 100, loss: 2.426059, top_1: 0.648496, top_k: 0.850903, samples/s: 5002.074 1623432992.688421
+train: epoch 46, iter 200, loss: 2.426566, top_1: 0.646167, top_k: 0.851318, samples/s: 4957.174 1623433034.002302
+train: epoch 46, iter 300, loss: 2.312923, top_1: 0.658823, top_k: 0.857676, samples/s: 4956.120 1623433075.3249292
+train: epoch 46, iter 400, loss: 2.343181, top_1: 0.657510, top_k: 0.857905, samples/s: 4958.673 1623433116.6262996
+train: epoch 46, iter 500, loss: 2.338451, top_1: 0.652759, top_k: 0.855039, samples/s: 4881.882 1623433158.5773497
+train: epoch 46, iter 600, loss: 2.350482, top_1: 0.652344, top_k: 0.855400, samples/s: 5003.685 1623433199.5071807
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_46.
+validation: epoch 46, iter 125, top_1: 0.631300, top_k: 0.854960, samples/s: 1048.889 1623433257.2546453
+train: epoch 47, iter 100, loss: 2.395482, top_1: 0.651567, top_k: 0.854043, samples/s: 5016.006 1623433313.445459
+train: epoch 47, iter 200, loss: 2.304555, top_1: 0.651724, top_k: 0.852539, samples/s: 4973.862 1623433354.6206608
+train: epoch 47, iter 300, loss: 2.349894, top_1: 0.662173, top_k: 0.860293, samples/s: 5013.890 1623433395.4671834
+train: epoch 47, iter 400, loss: 2.351807, top_1: 0.658438, top_k: 0.858862, samples/s: 4962.555 1623433436.736241
+train: epoch 47, iter 500, loss: 2.345238, top_1: 0.657646, top_k: 0.856733, samples/s: 4980.008 1623433477.8606749
+train: epoch 47, iter 600, loss: 2.388126, top_1: 0.656860, top_k: 0.857187, samples/s: 4907.731 1623433519.5907626
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_47.
+validation: epoch 47, iter 125, top_1: 0.645300, top_k: 0.861560, samples/s: 1036.681 1623433577.653335
+train: epoch 48, iter 100, loss: 2.381480, top_1: 0.655693, top_k: 0.856709, samples/s: 4967.833 1623433634.7755313
+train: epoch 48, iter 200, loss: 2.338380, top_1: 0.657129, top_k: 0.856465, samples/s: 5000.094 1623433675.7347515
+train: epoch 48, iter 300, loss: 2.315487, top_1: 0.664634, top_k: 0.862588, samples/s: 4932.971 1623433717.2513154
+train: epoch 48, iter 400, loss: 2.364146, top_1: 0.661445, top_k: 0.859575, samples/s: 5009.368 1623433758.1347642
+train: epoch 48, iter 500, loss: 2.301909, top_1: 0.660229, top_k: 0.858960, samples/s: 4927.977 1623433799.6934607
+train: epoch 48, iter 600, loss: 2.365687, top_1: 0.659976, top_k: 0.858525, samples/s: 4965.516 1623433840.9378228
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_48.
+validation: epoch 48, iter 125, top_1: 0.625980, top_k: 0.848400, samples/s: 1059.448 1623433897.8967767
+train: epoch 49, iter 100, loss: 2.362758, top_1: 0.657749, top_k: 0.857148, samples/s: 4996.866 1623433956.918756
+train: epoch 49, iter 200, loss: 2.405140, top_1: 0.658740, top_k: 0.857852, samples/s: 4974.817 1623433998.086092
+train: epoch 49, iter 300, loss: 2.314905, top_1: 0.669570, top_k: 0.864893, samples/s: 4977.380 1623434039.2322373
+train: epoch 49, iter 400, loss: 2.346264, top_1: 0.665581, top_k: 0.861592, samples/s: 4910.426 1623434080.9394217
+train: epoch 49, iter 500, loss: 2.349158, top_1: 0.664565, top_k: 0.862852, samples/s: 4907.757 1623434122.6692865
+train: epoch 49, iter 600, loss: 2.358475, top_1: 0.659995, top_k: 0.860156, samples/s: 4981.111 1623434163.7846067
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_49.
+validation: epoch 49, iter 125, top_1: 0.635200, top_k: 0.858620, samples/s: 1050.038 1623434221.2234244
+train: epoch 50, iter 100, loss: 2.323720, top_1: 0.659585, top_k: 0.860171, samples/s: 4924.141 1623434278.5896738
+train: epoch 50, iter 200, loss: 2.271638, top_1: 0.666777, top_k: 0.862559, samples/s: 4965.747 1623434319.832197
+train: epoch 50, iter 300, loss: 2.228110, top_1: 0.672817, top_k: 0.867686, samples/s: 4976.287 1623434360.9873595
+train: epoch 50, iter 400, loss: 2.322459, top_1: 0.669829, top_k: 0.865112, samples/s: 4959.478 1623434402.2820282
+train: epoch 50, iter 500, loss: 2.327543, top_1: 0.667524, top_k: 0.864106, samples/s: 5010.416 1623434443.1568778
+train: epoch 50, iter 600, loss: 2.290695, top_1: 0.665708, top_k: 0.861860, samples/s: 4961.901 1623434484.4313793
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_50.
+validation: epoch 50, iter 125, top_1: 0.647640, top_k: 0.865240, samples/s: 1024.652 1623434543.1112843
+train: epoch 51, iter 100, loss: 2.330119, top_1: 0.665791, top_k: 0.862959, samples/s: 4956.599 1623434600.1735709
+train: epoch 51, iter 200, loss: 2.235248, top_1: 0.670371, top_k: 0.864043, samples/s: 4973.867 1623434641.348797
+train: epoch 51, iter 300, loss: 2.252133, top_1: 0.675972, top_k: 0.869199, samples/s: 4955.733 1623434682.6746552
+train: epoch 51, iter 400, loss: 2.316945, top_1: 0.672700, top_k: 0.867188, samples/s: 4973.250 1623434723.855078
+train: epoch 51, iter 500, loss: 2.260485, top_1: 0.669687, top_k: 0.866348, samples/s: 4965.159 1623434765.102466
+train: epoch 51, iter 600, loss: 2.353792, top_1: 0.669512, top_k: 0.864365, samples/s: 4921.946 1623434806.711936
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_51.
+validation: epoch 51, iter 125, top_1: 0.651260, top_k: 0.871220, samples/s: 1045.489 1623434864.3349159
+train: epoch 52, iter 100, loss: 2.315567, top_1: 0.668184, top_k: 0.864868, samples/s: 4925.559 1623434921.2182891
+train: epoch 52, iter 200, loss: 2.242915, top_1: 0.674331, top_k: 0.867710, samples/s: 4892.605 1623434963.077373
+train: epoch 52, iter 300, loss: 2.307223, top_1: 0.677485, top_k: 0.870103, samples/s: 4978.991 1623435004.2102008
+train: epoch 52, iter 400, loss: 2.260417, top_1: 0.677007, top_k: 0.869893, samples/s: 4966.560 1623435045.4459813
+train: epoch 52, iter 500, loss: 2.301515, top_1: 0.675337, top_k: 0.866743, samples/s: 4975.469 1623435086.6079454
+train: epoch 52, iter 600, loss: 2.275892, top_1: 0.672949, top_k: 0.868105, samples/s: 4951.327 1623435127.9706087
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_52.
+validation: epoch 52, iter 125, top_1: 0.640620, top_k: 0.859860, samples/s: 1050.079 1623435185.3650823
+train: epoch 53, iter 100, loss: 2.303347, top_1: 0.673384, top_k: 0.865698, samples/s: 4996.211 1623435241.9860742
+train: epoch 53, iter 200, loss: 2.222977, top_1: 0.679570, top_k: 0.871055, samples/s: 5027.058 1623435282.7255127
+train: epoch 53, iter 300, loss: 2.248816, top_1: 0.683477, top_k: 0.872749, samples/s: 4980.080 1623435323.8493478
+train: epoch 53, iter 400, loss: 2.280831, top_1: 0.681216, top_k: 0.872290, samples/s: 4970.745 1623435365.0504177
+train: epoch 53, iter 500, loss: 2.220341, top_1: 0.677539, top_k: 0.870229, samples/s: 4993.815 1623435406.0611446
+train: epoch 53, iter 600, loss: 2.312790, top_1: 0.676792, top_k: 0.868755, samples/s: 4922.879 1623435447.6628249
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_53.
+validation: epoch 53, iter 125, top_1: 0.656300, top_k: 0.869860, samples/s: 1042.259 1623435505.6509852
+train: epoch 54, iter 100, loss: 2.202257, top_1: 0.675981, top_k: 0.869858, samples/s: 4986.994 1623435562.5138295
+train: epoch 54, iter 200, loss: 2.209676, top_1: 0.684824, top_k: 0.874155, samples/s: 5021.511 1623435603.2984152
+train: epoch 54, iter 300, loss: 2.240197, top_1: 0.685635, top_k: 0.874487, samples/s: 4980.922 1623435644.4152029
+train: epoch 54, iter 400, loss: 2.247393, top_1: 0.685166, top_k: 0.873618, samples/s: 4997.951 1623435685.3919919
+train: epoch 54, iter 500, loss: 2.237669, top_1: 0.679897, top_k: 0.871465, samples/s: 4941.754 1623435726.8347833
+train: epoch 54, iter 600, loss: 2.327775, top_1: 0.682896, top_k: 0.872954, samples/s: 4933.087 1623435768.3503473
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_54.
+validation: epoch 54, iter 125, top_1: 0.653240, top_k: 0.866180, samples/s: 1063.694 1623435825.1674573
+train: epoch 55, iter 100, loss: 2.266526, top_1: 0.680937, top_k: 0.872720, samples/s: 5029.329 1623435881.192454
+train: epoch 55, iter 200, loss: 2.159573, top_1: 0.690737, top_k: 0.878086, samples/s: 4974.047 1623435922.3662012
+train: epoch 55, iter 300, loss: 2.260546, top_1: 0.690454, top_k: 0.878101, samples/s: 4933.217 1623435963.8806653
+train: epoch 55, iter 400, loss: 2.301915, top_1: 0.688765, top_k: 0.876084, samples/s: 4937.967 1623436005.3552167
+train: epoch 55, iter 500, loss: 2.161565, top_1: 0.685166, top_k: 0.875474, samples/s: 4953.508 1623436046.6996567
+train: epoch 55, iter 600, loss: 2.247218, top_1: 0.683638, top_k: 0.874048, samples/s: 4942.629 1623436088.1351032
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_55.
+validation: epoch 55, iter 125, top_1: 0.669460, top_k: 0.878820, samples/s: 1053.412 1623436145.5747232
+train: epoch 56, iter 100, loss: 2.256191, top_1: 0.684546, top_k: 0.873994, samples/s: 4908.187 1623436202.9502594
+train: epoch 56, iter 200, loss: 2.219689, top_1: 0.697852, top_k: 0.881592, samples/s: 4981.354 1623436244.0633953
+train: epoch 56, iter 300, loss: 2.125568, top_1: 0.694639, top_k: 0.879917, samples/s: 4947.093 1623436285.4614599
+train: epoch 56, iter 400, loss: 2.231910, top_1: 0.690684, top_k: 0.878066, samples/s: 4960.741 1623436326.7456183
+train: epoch 56, iter 500, loss: 2.199024, top_1: 0.689570, top_k: 0.876523, samples/s: 4958.294 1623436368.0501406
+train: epoch 56, iter 600, loss: 2.195329, top_1: 0.690640, top_k: 0.878701, samples/s: 4930.560 1623436409.587009
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_56.
+validation: epoch 56, iter 125, top_1: 0.661660, top_k: 0.872040, samples/s: 1041.947 1623436467.2988012
+train: epoch 57, iter 100, loss: 2.157744, top_1: 0.687803, top_k: 0.876992, samples/s: 4963.811 1623436524.2148447
+train: epoch 57, iter 200, loss: 2.172551, top_1: 0.701201, top_k: 0.884185, samples/s: 4958.813 1623436565.51505
+train: epoch 57, iter 300, loss: 2.206493, top_1: 0.697378, top_k: 0.881494, samples/s: 4934.102 1623436607.0221002
+train: epoch 57, iter 400, loss: 2.188018, top_1: 0.697041, top_k: 0.880215, samples/s: 4915.499 1623436648.686249
+train: epoch 57, iter 500, loss: 2.205198, top_1: 0.694780, top_k: 0.880156, samples/s: 4991.275 1623436689.717871
+train: epoch 57, iter 600, loss: 2.199759, top_1: 0.693257, top_k: 0.879717, samples/s: 4976.396 1623436730.8720891
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_57.
+validation: epoch 57, iter 125, top_1: 0.667360, top_k: 0.876400, samples/s: 1055.179 1623436788.272104
+train: epoch 58, iter 100, loss: 2.159320, top_1: 0.693691, top_k: 0.879307, samples/s: 4996.428 1623436844.8277743
+train: epoch 58, iter 200, loss: 2.158392, top_1: 0.706528, top_k: 0.887363, samples/s: 4935.247 1623436886.3251882
+train: epoch 58, iter 300, loss: 2.190865, top_1: 0.704263, top_k: 0.884639, samples/s: 4948.094 1623436927.714858
+train: epoch 58, iter 400, loss: 2.216822, top_1: 0.701626, top_k: 0.883359, samples/s: 4965.852 1623436968.9565232
+train: epoch 58, iter 500, loss: 2.133776, top_1: 0.700171, top_k: 0.883584, samples/s: 4965.549 1623437010.2007046
+train: epoch 58, iter 600, loss: 2.167034, top_1: 0.698174, top_k: 0.882056, samples/s: 4954.022 1623437051.5408623
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_58.
+validation: epoch 58, iter 125, top_1: 0.683320, top_k: 0.888260, samples/s: 1043.116 1623437109.250873
+train: epoch 59, iter 100, loss: 2.166090, top_1: 0.699736, top_k: 0.882490, samples/s: 4965.198 1623437166.0510776
+train: epoch 59, iter 200, loss: 2.115915, top_1: 0.712046, top_k: 0.889619, samples/s: 4984.260 1623437207.140397
+train: epoch 59, iter 300, loss: 2.158044, top_1: 0.706499, top_k: 0.886377, samples/s: 4943.804 1623437248.5659876
+train: epoch 59, iter 400, loss: 2.187906, top_1: 0.704492, top_k: 0.885352, samples/s: 4994.811 1623437289.5685518
+train: epoch 59, iter 500, loss: 2.224260, top_1: 0.704785, top_k: 0.885342, samples/s: 4999.863 1623437330.529673
+train: epoch 59, iter 600, loss: 2.180884, top_1: 0.704893, top_k: 0.884438, samples/s: 4895.486 1623437372.3641396
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_59.
+validation: epoch 59, iter 125, top_1: 0.688700, top_k: 0.891080, samples/s: 1020.470 1623437431.2501712
+train: epoch 60, iter 100, loss: 2.097857, top_1: 0.704780, top_k: 0.885850, samples/s: 4897.068 1623437488.5098116
+train: epoch 60, iter 200, loss: 2.096502, top_1: 0.712422, top_k: 0.890361, samples/s: 4940.703 1623437529.961231
+train: epoch 60, iter 300, loss: 2.118427, top_1: 0.712310, top_k: 0.890747, samples/s: 4922.484 1623437571.566209
+train: epoch 60, iter 400, loss: 2.138981, top_1: 0.709756, top_k: 0.888857, samples/s: 4971.330 1623437612.7624147
+train: epoch 60, iter 500, loss: 2.140607, top_1: 0.706060, top_k: 0.887188, samples/s: 4926.470 1623437654.3337684
+train: epoch 60, iter 600, loss: 2.161107, top_1: 0.708472, top_k: 0.887075, samples/s: 4924.226 1623437695.9240737
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_60.
+validation: epoch 60, iter 125, top_1: 0.679460, top_k: 0.886380, samples/s: 1053.028 1623437753.2598279
+train: epoch 61, iter 100, loss: 2.138567, top_1: 0.709829, top_k: 0.888789, samples/s: 4977.400 1623437809.6612732
+train: epoch 61, iter 200, loss: 2.099535, top_1: 0.719102, top_k: 0.893887, samples/s: 4853.948 1623437851.8537343
+train: epoch 61, iter 300, loss: 2.106375, top_1: 0.715322, top_k: 0.891406, samples/s: 4925.875 1623437893.4300976
+train: epoch 61, iter 400, loss: 2.142944, top_1: 0.714907, top_k: 0.891099, samples/s: 4873.555 1623437935.4528034
+train: epoch 61, iter 500, loss: 2.143545, top_1: 0.712490, top_k: 0.890801, samples/s: 4930.283 1623437976.992003
+train: epoch 61, iter 600, loss: 2.117398, top_1: 0.712939, top_k: 0.891128, samples/s: 4942.290 1623438018.430283
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_61.
+validation: epoch 61, iter 125, top_1: 0.683180, top_k: 0.887460, samples/s: 1051.445 1623438075.8400197
+train: epoch 62, iter 100, loss: 2.050030, top_1: 0.717378, top_k: 0.892490, samples/s: 4949.187 1623438132.8263407
+train: epoch 62, iter 200, loss: 2.111703, top_1: 0.722783, top_k: 0.895991, samples/s: 4858.769 1623438174.976915
+train: epoch 62, iter 300, loss: 2.101901, top_1: 0.720298, top_k: 0.895112, samples/s: 4917.553 1623438216.6236355
+train: epoch 62, iter 400, loss: 2.069682, top_1: 0.717085, top_k: 0.893350, samples/s: 4921.799 1623438258.2344368
+train: epoch 62, iter 500, loss: 2.119017, top_1: 0.718970, top_k: 0.893286, samples/s: 4929.107 1623438299.783551
+train: epoch 62, iter 600, loss: 2.156656, top_1: 0.716401, top_k: 0.892144, samples/s: 4969.697 1623438340.9933157
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_62.
+validation: epoch 62, iter 125, top_1: 0.699860, top_k: 0.895460, samples/s: 1043.532 1623438398.823745
+train: epoch 63, iter 100, loss: 2.077889, top_1: 0.723013, top_k: 0.896499, samples/s: 5005.438 1623438455.2183006
+train: epoch 63, iter 200, loss: 2.096886, top_1: 0.728086, top_k: 0.899429, samples/s: 4931.814 1623438496.7446303
+train: epoch 63, iter 300, loss: 2.096473, top_1: 0.727520, top_k: 0.899492, samples/s: 4933.200 1623438538.2592778
+train: epoch 63, iter 400, loss: 2.053986, top_1: 0.724692, top_k: 0.897998, samples/s: 4973.369 1623438579.438649
+train: epoch 63, iter 500, loss: 2.086133, top_1: 0.722954, top_k: 0.895791, samples/s: 5000.787 1623438620.392118
+train: epoch 63, iter 600, loss: 2.009037, top_1: 0.725127, top_k: 0.896875, samples/s: 4986.046 1623438661.4667485
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_63.
+validation: epoch 63, iter 125, top_1: 0.702800, top_k: 0.896940, samples/s: 1052.357 1623438718.7785876
+train: epoch 64, iter 100, loss: 2.056156, top_1: 0.731738, top_k: 0.900234, samples/s: 5044.007 1623438775.1489832
+train: epoch 64, iter 200, loss: 2.098446, top_1: 0.732710, top_k: 0.900728, samples/s: 4970.779 1623438816.3497622
+train: epoch 64, iter 300, loss: 2.022568, top_1: 0.731377, top_k: 0.899927, samples/s: 4975.777 1623438857.509166
+train: epoch 64, iter 400, loss: 2.062905, top_1: 0.729873, top_k: 0.898994, samples/s: 4935.795 1623438899.0019774
+train: epoch 64, iter 500, loss: 2.098595, top_1: 0.727153, top_k: 0.898989, samples/s: 4961.109 1623438940.2830725
+train: epoch 64, iter 600, loss: 2.083182, top_1: 0.728408, top_k: 0.898145, samples/s: 4877.193 1623438982.2744477
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_64.
+validation: epoch 64, iter 125, top_1: 0.711800, top_k: 0.903240, samples/s: 1053.446 1623439039.531683
+train: epoch 65, iter 100, loss: 2.063430, top_1: 0.735947, top_k: 0.903130, samples/s: 4985.326 1623439099.2998736
+train: epoch 65, iter 200, loss: 2.064162, top_1: 0.737070, top_k: 0.904092, samples/s: 4988.723 1623439140.3521934
+train: epoch 65, iter 300, loss: 2.029306, top_1: 0.736113, top_k: 0.903008, samples/s: 4965.534 1623439181.5965092
+train: epoch 65, iter 400, loss: 2.047282, top_1: 0.735757, top_k: 0.901719, samples/s: 4950.106 1623439222.9693627
+train: epoch 65, iter 500, loss: 2.077445, top_1: 0.732988, top_k: 0.901914, samples/s: 4933.793 1623439264.4790037
+train: epoch 65, iter 600, loss: 2.022524, top_1: 0.734873, top_k: 0.902129, samples/s: 4955.594 1623439305.806037
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_65.
+validation: epoch 65, iter 125, top_1: 0.715460, top_k: 0.905220, samples/s: 1047.998 1623439363.332168
+train: epoch 66, iter 100, loss: 2.015520, top_1: 0.741846, top_k: 0.906035, samples/s: 4943.446 1623439420.3980262
+train: epoch 66, iter 200, loss: 2.001878, top_1: 0.743701, top_k: 0.906611, samples/s: 4976.907 1623439461.5481749
+train: epoch 66, iter 300, loss: 2.002500, top_1: 0.742627, top_k: 0.906650, samples/s: 4946.466 1623439502.9514651
+train: epoch 66, iter 400, loss: 1.978695, top_1: 0.739956, top_k: 0.905322, samples/s: 4929.559 1623439544.4966652
+train: epoch 66, iter 500, loss: 2.057534, top_1: 0.740171, top_k: 0.905327, samples/s: 4975.359 1623439585.6595333
+train: epoch 66, iter 600, loss: 2.010874, top_1: 0.740825, top_k: 0.905283, samples/s: 4943.439 1623439627.0881774
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_66.
+validation: epoch 66, iter 125, top_1: 0.717920, top_k: 0.906860, samples/s: 1049.734 1623439684.4405098
+train: epoch 67, iter 100, loss: 2.035270, top_1: 0.749893, top_k: 0.909917, samples/s: 4966.264 1623439741.493146
+train: epoch 67, iter 200, loss: 2.026013, top_1: 0.748115, top_k: 0.908291, samples/s: 4913.632 1623439783.1731033
+train: epoch 67, iter 300, loss: 1.973545, top_1: 0.747666, top_k: 0.906943, samples/s: 4913.932 1623439824.850522
+train: epoch 67, iter 400, loss: 2.037207, top_1: 0.746650, top_k: 0.907793, samples/s: 4875.462 1623439866.8567996
+train: epoch 67, iter 500, loss: 1.958061, top_1: 0.746777, top_k: 0.907183, samples/s: 4969.153 1623439908.0710523
+train: epoch 67, iter 600, loss: 1.975457, top_1: 0.746113, top_k: 0.907456, samples/s: 4958.392 1623439949.3747754
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_67.
+validation: epoch 67, iter 125, top_1: 0.714300, top_k: 0.904440, samples/s: 1052.602 1623440006.700266
+train: epoch 68, iter 100, loss: 1.942554, top_1: 0.755142, top_k: 0.912212, samples/s: 5016.756 1623440063.1868763
+train: epoch 68, iter 200, loss: 1.949106, top_1: 0.755361, top_k: 0.912266, samples/s: 4940.964 1623440104.636249
+train: epoch 68, iter 300, loss: 2.034388, top_1: 0.752832, top_k: 0.911211, samples/s: 5008.849 1623440145.523912
+train: epoch 68, iter 400, loss: 1.971418, top_1: 0.751978, top_k: 0.910923, samples/s: 4909.446 1623440187.2393856
+train: epoch 68, iter 500, loss: 2.035282, top_1: 0.752373, top_k: 0.911245, samples/s: 4960.076 1623440228.5290675
+train: epoch 68, iter 600, loss: 1.985414, top_1: 0.751763, top_k: 0.911011, samples/s: 4960.276 1623440269.817097
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_68.
+validation: epoch 68, iter 125, top_1: 0.725820, top_k: 0.912600, samples/s: 1039.159 1623440327.93578
+train: epoch 69, iter 100, loss: 1.926188, top_1: 0.761699, top_k: 0.916162, samples/s: 4946.118 1623440385.0243049
+train: epoch 69, iter 200, loss: 1.986250, top_1: 0.759897, top_k: 0.914507, samples/s: 4963.359 1623440426.2866755
+train: epoch 69, iter 300, loss: 1.930137, top_1: 0.758545, top_k: 0.913286, samples/s: 4980.752 1623440467.4049785
+train: epoch 69, iter 400, loss: 1.931755, top_1: 0.759160, top_k: 0.913569, samples/s: 4992.577 1623440508.425977
+train: epoch 69, iter 500, loss: 1.995542, top_1: 0.758633, top_k: 0.914316, samples/s: 4924.101 1623440550.017243
+train: epoch 69, iter 600, loss: 1.947494, top_1: 0.757324, top_k: 0.913267, samples/s: 4937.217 1623440591.4980779
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_69.
+validation: epoch 69, iter 125, top_1: 0.724760, top_k: 0.911840, samples/s: 1048.316 1623440649.2267652
+train: epoch 70, iter 100, loss: 1.893629, top_1: 0.768115, top_k: 0.918652, samples/s: 4872.831 1623440706.6832256
+train: epoch 70, iter 200, loss: 1.868193, top_1: 0.767939, top_k: 0.918896, samples/s: 4946.953 1623440748.0824409
+train: epoch 70, iter 300, loss: 1.918946, top_1: 0.765288, top_k: 0.917266, samples/s: 4962.244 1623440789.3540876
+train: epoch 70, iter 400, loss: 1.936453, top_1: 0.764287, top_k: 0.916519, samples/s: 4961.964 1623440830.6280866
+train: epoch 70, iter 500, loss: 1.926953, top_1: 0.764658, top_k: 0.916919, samples/s: 4961.044 1623440871.9097016
+train: epoch 70, iter 600, loss: 1.976771, top_1: 0.764019, top_k: 0.917485, samples/s: 4921.832 1623440913.520236
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_70.
+validation: epoch 70, iter 125, top_1: 0.725680, top_k: 0.910980, samples/s: 1039.273 1623440971.390501
+train: epoch 71, iter 100, loss: 1.847508, top_1: 0.774243, top_k: 0.921611, samples/s: 4978.766 1623441030.8556118
+train: epoch 71, iter 200, loss: 1.926688, top_1: 0.772930, top_k: 0.921040, samples/s: 4926.651 1623441072.4254074
+train: epoch 71, iter 300, loss: 1.913208, top_1: 0.772271, top_k: 0.919590, samples/s: 5008.992 1623441113.311878
+train: epoch 71, iter 400, loss: 1.895791, top_1: 0.771216, top_k: 0.920063, samples/s: 4987.613 1623441154.373627
+train: epoch 71, iter 500, loss: 1.921041, top_1: 0.771196, top_k: 0.920615, samples/s: 4982.918 1623441195.4740207
+train: epoch 71, iter 600, loss: 1.879189, top_1: 0.770020, top_k: 0.918706, samples/s: 4930.698 1623441237.0097387
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_71.
+validation: epoch 71, iter 125, top_1: 0.733220, top_k: 0.915040, samples/s: 1037.704 1623441295.2327962
+train: epoch 72, iter 100, loss: 1.891581, top_1: 0.780107, top_k: 0.924155, samples/s: 4981.946 1623441352.1981268
+train: epoch 72, iter 200, loss: 1.841182, top_1: 0.779419, top_k: 0.924937, samples/s: 4975.341 1623441393.3611329
+train: epoch 72, iter 300, loss: 1.850425, top_1: 0.778252, top_k: 0.922544, samples/s: 4972.112 1623441434.550964
+train: epoch 72, iter 400, loss: 1.897218, top_1: 0.776704, top_k: 0.923677, samples/s: 4967.720 1623441475.7770412
+train: epoch 72, iter 500, loss: 1.872485, top_1: 0.778921, top_k: 0.922417, samples/s: 4958.244 1623441517.0820165
+train: epoch 72, iter 600, loss: 1.853190, top_1: 0.777861, top_k: 0.922798, samples/s: 4968.422 1623441558.302305
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_72.
+validation: epoch 72, iter 125, top_1: 0.740340, top_k: 0.918980, samples/s: 1049.837 1623441615.8667886
+train: epoch 73, iter 100, loss: 1.925252, top_1: 0.786865, top_k: 0.926533, samples/s: 4941.831 1623441672.6033313
+train: epoch 73, iter 200, loss: 1.876609, top_1: 0.784170, top_k: 0.925923, samples/s: 4930.794 1623441714.138248
+train: epoch 73, iter 300, loss: 1.895641, top_1: 0.783677, top_k: 0.925249, samples/s: 4936.774 1623441755.6228008
+train: epoch 73, iter 400, loss: 1.845213, top_1: 0.783345, top_k: 0.925649, samples/s: 4910.996 1623441797.325141
+train: epoch 73, iter 500, loss: 1.849776, top_1: 0.783545, top_k: 0.926152, samples/s: 4970.712 1623441838.526479
+train: epoch 73, iter 600, loss: 1.783557, top_1: 0.786343, top_k: 0.926221, samples/s: 4989.707 1623441879.5709689
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_73.
+validation: epoch 73, iter 125, top_1: 0.742060, top_k: 0.921380, samples/s: 1044.837 1623441937.205455
+train: epoch 74, iter 100, loss: 1.823861, top_1: 0.791025, top_k: 0.927925, samples/s: 4982.706 1623441993.8273873
+train: epoch 74, iter 200, loss: 1.856144, top_1: 0.789731, top_k: 0.928438, samples/s: 4960.484 1623442035.113675
+train: epoch 74, iter 300, loss: 1.794145, top_1: 0.790947, top_k: 0.929004, samples/s: 5015.019 1623442075.9510405
+train: epoch 74, iter 400, loss: 1.875124, top_1: 0.790049, top_k: 0.928438, samples/s: 4994.163 1623442116.9588995
+train: epoch 74, iter 500, loss: 1.856863, top_1: 0.788579, top_k: 0.928306, samples/s: 4951.267 1623442158.3220575
+train: epoch 74, iter 600, loss: 1.805173, top_1: 0.792793, top_k: 0.929365, samples/s: 4848.283 1623442200.5637906
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_74.
+validation: epoch 74, iter 125, top_1: 0.745000, top_k: 0.923320, samples/s: 1040.390 1623442258.424831
+train: epoch 75, iter 100, loss: 1.823736, top_1: 0.797510, top_k: 0.931831, samples/s: 4946.845 1623442315.7539957
+train: epoch 75, iter 200, loss: 1.830166, top_1: 0.796509, top_k: 0.931626, samples/s: 4957.682 1623442357.0636005
+train: epoch 75, iter 300, loss: 1.806785, top_1: 0.796987, top_k: 0.931294, samples/s: 4919.144 1623442398.6969066
+train: epoch 75, iter 400, loss: 1.773813, top_1: 0.797510, top_k: 0.931519, samples/s: 4889.105 1623442440.5859237
+train: epoch 75, iter 500, loss: 1.777749, top_1: 0.796196, top_k: 0.931382, samples/s: 4924.930 1623442482.1702738
+train: epoch 75, iter 600, loss: 1.785165, top_1: 0.799829, top_k: 0.932529, samples/s: 4972.368 1623442523.3578916
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_75.
+validation: epoch 75, iter 125, top_1: 0.751540, top_k: 0.924920, samples/s: 1071.479 1623442579.8033643
+train: epoch 76, iter 100, loss: 1.748670, top_1: 0.803335, top_k: 0.933462, samples/s: 4943.195 1623442636.4294686
+train: epoch 76, iter 200, loss: 1.788758, top_1: 0.802822, top_k: 0.933833, samples/s: 4904.910 1623442678.1835482
+train: epoch 76, iter 300, loss: 1.796189, top_1: 0.803833, top_k: 0.933447, samples/s: 4900.099 1623442719.9786327
+train: epoch 76, iter 400, loss: 1.792573, top_1: 0.803364, top_k: 0.933867, samples/s: 4887.468 1623442761.881719
+train: epoch 76, iter 500, loss: 1.753434, top_1: 0.803525, top_k: 0.933564, samples/s: 4922.212 1623442803.48904
+train: epoch 76, iter 600, loss: 1.730592, top_1: 0.805552, top_k: 0.935015, samples/s: 4988.787 1623442844.541134
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_76.
+validation: epoch 76, iter 125, top_1: 0.752200, top_k: 0.925560, samples/s: 1052.343 1623442901.8562486
+train: epoch 77, iter 100, loss: 1.806929, top_1: 0.806592, top_k: 0.935576, samples/s: 5004.412 1623442958.0456328
+train: epoch 77, iter 200, loss: 1.788427, top_1: 0.807583, top_k: 0.935825, samples/s: 4957.948 1623442999.3530557
+train: epoch 77, iter 300, loss: 1.799774, top_1: 0.807861, top_k: 0.935396, samples/s: 4972.624 1623443040.5385602
+train: epoch 77, iter 400, loss: 1.695050, top_1: 0.806621, top_k: 0.935093, samples/s: 4966.442 1623443081.775321
+train: epoch 77, iter 500, loss: 1.748602, top_1: 0.807988, top_k: 0.935645, samples/s: 4945.957 1623443123.1828816
+train: epoch 77, iter 600, loss: 1.741446, top_1: 0.811221, top_k: 0.936201, samples/s: 4962.446 1623443164.452851
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_77.
+validation: epoch 77, iter 125, top_1: 0.751900, top_k: 0.925040, samples/s: 1023.303 1623443223.0696607
+train: epoch 78, iter 100, loss: 1.749759, top_1: 0.812808, top_k: 0.937485, samples/s: 5004.201 1623443280.3167396
+train: epoch 78, iter 200, loss: 1.749544, top_1: 0.812466, top_k: 0.937256, samples/s: 4991.359 1623443321.347632
+train: epoch 78, iter 300, loss: 1.721299, top_1: 0.811318, top_k: 0.936826, samples/s: 4928.895 1623443362.8985236
+train: epoch 78, iter 400, loss: 1.779067, top_1: 0.811768, top_k: 0.937197, samples/s: 4987.184 1623443403.9638193
+train: epoch 78, iter 500, loss: 1.752594, top_1: 0.813555, top_k: 0.938130, samples/s: 4961.968 1623443445.237726
+train: epoch 78, iter 600, loss: 1.763360, top_1: 0.814204, top_k: 0.937651, samples/s: 4932.393 1623443486.7591724
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_78.
+validation: epoch 78, iter 125, top_1: 0.755200, top_k: 0.927800, samples/s: 1045.460 1623443544.3791842
+train: epoch 79, iter 100, loss: 1.717521, top_1: 0.815430, top_k: 0.938452, samples/s: 4913.952 1623443601.6272848
+train: epoch 79, iter 200, loss: 1.699166, top_1: 0.817744, top_k: 0.939829, samples/s: 4969.945 1623443642.834969
+train: epoch 79, iter 300, loss: 1.765805, top_1: 0.816753, top_k: 0.939194, samples/s: 4943.825 1623443684.2603889
+train: epoch 79, iter 400, loss: 1.696136, top_1: 0.816147, top_k: 0.938765, samples/s: 4903.613 1623443726.025532
+train: epoch 79, iter 500, loss: 1.735355, top_1: 0.816313, top_k: 0.939028, samples/s: 4981.624 1623443767.1365983
+train: epoch 79, iter 600, loss: 1.723241, top_1: 0.819873, top_k: 0.940059, samples/s: 4966.799 1623443808.370485
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_79.
+validation: epoch 79, iter 125, top_1: 0.757740, top_k: 0.928340, samples/s: 1043.445 1623443866.4000885
+train: epoch 80, iter 100, loss: 1.745775, top_1: 0.819443, top_k: 0.940625, samples/s: 4937.047 1623443924.8055067
+train: epoch 80, iter 200, loss: 1.687607, top_1: 0.820864, top_k: 0.940029, samples/s: 4953.891 1623443966.146628
+train: epoch 80, iter 300, loss: 1.714654, top_1: 0.821250, top_k: 0.940371, samples/s: 4979.395 1623444007.2761455
+train: epoch 80, iter 400, loss: 1.737766, top_1: 0.818667, top_k: 0.939678, samples/s: 4977.713 1623444048.419532
+train: epoch 80, iter 500, loss: 1.701162, top_1: 0.819614, top_k: 0.939790, samples/s: 4950.622 1623444089.7880788
+train: epoch 80, iter 600, loss: 1.762604, top_1: 0.824526, top_k: 0.941299, samples/s: 4935.792 1623444131.2808957
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_80.
+validation: epoch 80, iter 125, top_1: 0.758720, top_k: 0.928660, samples/s: 1028.493 1623444189.7085257
+train: epoch 81, iter 100, loss: 1.694678, top_1: 0.822451, top_k: 0.940835, samples/s: 4999.318 1623444246.4123588
+train: epoch 81, iter 200, loss: 1.752266, top_1: 0.822710, top_k: 0.941826, samples/s: 4959.304 1623444287.7084663
+train: epoch 81, iter 300, loss: 1.717458, top_1: 0.823711, top_k: 0.941226, samples/s: 4978.508 1623444328.845294
+train: epoch 81, iter 400, loss: 1.763003, top_1: 0.823433, top_k: 0.942056, samples/s: 4937.744 1623444370.3217213
+train: epoch 81, iter 500, loss: 1.732999, top_1: 0.822725, top_k: 0.941367, samples/s: 4989.857 1623444411.3650007
+train: epoch 81, iter 600, loss: 1.729700, top_1: 0.824204, top_k: 0.941797, samples/s: 4957.385 1623444452.6771564
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_81.
+validation: epoch 81, iter 125, top_1: 0.759880, top_k: 0.929260, samples/s: 1050.830 1623444510.0743358
+train: epoch 82, iter 100, loss: 1.704487, top_1: 0.827017, top_k: 0.942998, samples/s: 4984.985 1623444566.3704317
+train: epoch 82, iter 200, loss: 1.710532, top_1: 0.825747, top_k: 0.942148, samples/s: 4941.653 1623444607.8137982
+train: epoch 82, iter 300, loss: 1.747668, top_1: 0.825791, top_k: 0.942524, samples/s: 4929.587 1623444649.3588717
+train: epoch 82, iter 400, loss: 1.745138, top_1: 0.826641, top_k: 0.942993, samples/s: 4985.475 1623444690.4381993
+train: epoch 82, iter 500, loss: 1.716994, top_1: 0.824263, top_k: 0.941587, samples/s: 4974.234 1623444731.6103668
+train: epoch 82, iter 600, loss: 1.716851, top_1: 0.826348, top_k: 0.942588, samples/s: 4918.557 1623444773.2486186
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_82.
+validation: epoch 82, iter 125, top_1: 0.759800, top_k: 0.929900, samples/s: 1054.093 1623444830.563715
+train: epoch 83, iter 100, loss: 1.737494, top_1: 0.827876, top_k: 0.942461, samples/s: 4981.184 1623444887.5342877
+train: epoch 83, iter 200, loss: 1.719025, top_1: 0.825913, top_k: 0.941733, samples/s: 4951.065 1623444928.8990674
+train: epoch 83, iter 300, loss: 1.697258, top_1: 0.827266, top_k: 0.943203, samples/s: 4976.802 1623444970.0500011
+train: epoch 83, iter 400, loss: 1.725891, top_1: 0.825654, top_k: 0.942661, samples/s: 4946.005 1623445011.4571497
+train: epoch 83, iter 500, loss: 1.698255, top_1: 0.828027, top_k: 0.943242, samples/s: 4920.736 1623445053.076948
+train: epoch 83, iter 600, loss: 1.683608, top_1: 0.825688, top_k: 0.941953, samples/s: 4933.913 1623445094.5855756
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_83.
+validation: epoch 83, iter 125, top_1: 0.760760, top_k: 0.929700, samples/s: 1031.523 1623445152.904222
+train: epoch 84, iter 100, loss: 1.700438, top_1: 0.826968, top_k: 0.943032, samples/s: 4968.957 1623445209.838092
+train: epoch 84, iter 200, loss: 1.732051, top_1: 0.827495, top_k: 0.941782, samples/s: 4974.493 1623445251.0081406
+train: epoch 84, iter 300, loss: 1.775551, top_1: 0.826660, top_k: 0.942798, samples/s: 5006.853 1623445291.9120708
+train: epoch 84, iter 400, loss: 1.739993, top_1: 0.826963, top_k: 0.943252, samples/s: 4940.732 1623445333.3634107
+train: epoch 84, iter 500, loss: 1.694151, top_1: 0.827964, top_k: 0.943003, samples/s: 4958.729 1623445374.6643143
+train: epoch 84, iter 600, loss: 1.737456, top_1: 0.827480, top_k: 0.942900, samples/s: 4965.728 1623445415.9070084
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_84.
+validation: epoch 84, iter 125, top_1: 0.760660, top_k: 0.929720, samples/s: 1047.894 1623445473.4682791
+train: epoch 85, iter 100, loss: 1.707276, top_1: 0.828438, top_k: 0.943604, samples/s: 4957.742 1623445531.3100147
+train: epoch 85, iter 200, loss: 1.692060, top_1: 0.827271, top_k: 0.942183, samples/s: 4956.251 1623445572.6314948
+train: epoch 85, iter 300, loss: 1.754619, top_1: 0.827207, top_k: 0.942173, samples/s: 4959.211 1623445613.9284112
+train: epoch 85, iter 400, loss: 1.719545, top_1: 0.826973, top_k: 0.942651, samples/s: 4895.004 1623445655.7669654
+train: epoch 85, iter 500, loss: 1.709055, top_1: 0.826958, top_k: 0.942588, samples/s: 4950.639 1623445697.135401
+train: epoch 85, iter 600, loss: 1.681592, top_1: 0.827476, top_k: 0.942261, samples/s: 4965.476 1623445738.3801613
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_85.
+validation: epoch 85, iter 125, top_1: 0.760600, top_k: 0.930160, samples/s: 1052.494 1623445795.6506581
+train: epoch 86, iter 100, loss: 1.702462, top_1: 0.829097, top_k: 0.943511, samples/s: 4998.441 1623445851.9325929
+train: epoch 86, iter 200, loss: 1.707856, top_1: 0.828315, top_k: 0.943311, samples/s: 4954.915 1623445893.2652733
+train: epoch 86, iter 300, loss: 1.720823, top_1: 0.826978, top_k: 0.942578, samples/s: 4943.940 1623445934.689622
+train: epoch 86, iter 400, loss: 1.715710, top_1: 0.829092, top_k: 0.943516, samples/s: 4856.137 1623445976.8630555
+train: epoch 86, iter 500, loss: 1.692213, top_1: 0.828550, top_k: 0.943081, samples/s: 4920.137 1623446018.4879258
+train: epoch 86, iter 600, loss: 1.685996, top_1: 0.827554, top_k: 0.942856, samples/s: 4914.594 1623446060.1597304
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_86.
+validation: epoch 86, iter 125, top_1: 0.760680, top_k: 0.930020, samples/s: 1030.613 1623446118.8914664
+train: epoch 87, iter 100, loss: 1.693594, top_1: 0.827598, top_k: 0.943369, samples/s: 4960.542 1623446175.7018933
+train: epoch 87, iter 200, loss: 1.702643, top_1: 0.827568, top_k: 0.943174, samples/s: 4978.064 1623446216.8423831
+train: epoch 87, iter 300, loss: 1.662786, top_1: 0.826069, top_k: 0.942500, samples/s: 4995.710 1623446257.837554
+train: epoch 87, iter 400, loss: 1.698561, top_1: 0.827129, top_k: 0.942959, samples/s: 4971.148 1623446299.0353138
+train: epoch 87, iter 500, loss: 1.719571, top_1: 0.828315, top_k: 0.943354, samples/s: 4955.217 1623446340.3654525
+train: epoch 87, iter 600, loss: 1.707020, top_1: 0.827544, top_k: 0.942969, samples/s: 4903.241 1623446382.1337454
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_87.
+validation: epoch 87, iter 125, top_1: 0.760320, top_k: 0.929420, samples/s: 1061.197 1623446439.0810378
+train: epoch 88, iter 100, loss: 1.684112, top_1: 0.827173, top_k: 0.942896, samples/s: 4876.327 1623446496.540527
+train: epoch 88, iter 200, loss: 1.699510, top_1: 0.827007, top_k: 0.943462, samples/s: 4848.953 1623446538.776411
+train: epoch 88, iter 300, loss: 1.754585, top_1: 0.827109, top_k: 0.942637, samples/s: 4912.658 1623446580.4646158
+train: epoch 88, iter 400, loss: 1.705758, top_1: 0.828374, top_k: 0.943027, samples/s: 4951.712 1623446621.8240566
+train: epoch 88, iter 500, loss: 1.718438, top_1: 0.827070, top_k: 0.943301, samples/s: 4947.577 1623446663.2180471
+train: epoch 88, iter 600, loss: 1.678427, top_1: 0.826870, top_k: 0.941997, samples/s: 4947.323 1623446704.614227
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_88.
+validation: epoch 88, iter 125, top_1: 0.760700, top_k: 0.929860, samples/s: 1056.279 1623446762.155007
+train: epoch 89, iter 100, loss: 1.716085, top_1: 0.827310, top_k: 0.943145, samples/s: 4964.634 1623446819.1371446
+train: epoch 89, iter 200, loss: 1.744533, top_1: 0.827939, top_k: 0.943218, samples/s: 4973.883 1623446860.3122392
+train: epoch 89, iter 300, loss: 1.677346, top_1: 0.827134, top_k: 0.941982, samples/s: 4924.552 1623446901.8997767
+train: epoch 89, iter 400, loss: 1.723120, top_1: 0.827803, top_k: 0.942471, samples/s: 4963.427 1623446943.1615615
+train: epoch 89, iter 500, loss: 1.703146, top_1: 0.827383, top_k: 0.942573, samples/s: 4966.921 1623446984.394354
+train: epoch 89, iter 600, loss: 1.732074, top_1: 0.826719, top_k: 0.942520, samples/s: 4962.431 1623447025.6644816
+Saving model to ./output/snapshots/model_save-20210611212638/snapshot_epoch_89.
+validation: epoch 89, iter 125, top_1: 0.760840, top_k: 0.929940, samples/s: 1038.287 1623447083.9033048
